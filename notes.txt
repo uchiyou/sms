@@ -1,0 +1,22 @@
+select * from student where student_class in (select class_no
+ from classes where grade=‘13’）；从全校学生列表和全校班级列表中查询13学年级所有学生的信息。
+子查询常常与exist运算符配合使用，exist(子查询） 如果子查询返回至少一条记录，则其逻辑值为TRUE
+子查询与any运算符。any运算符常与比较运算符配合使用，表达式>any（子查询），若表达式的值大于子查询
+返回的结果集中的某一个（All运算符，则需要时所有）值，则整个表达式的逻辑值为TRUE。   
+
+
+select * from course where course_number in ( select course_number from course_teacher where wage_number='123');
+select sequence,course_content,type from course_record where course_number='1000'";
+
+
+1 内连接是将两个表中满足指定条件的记录连接成型的结果集，并舍弃所有不满足条件的记录；内连接-默认为内连接
+。例； select name,age,s.clazz_no,department_name from student as s join clazz c on s.clazz_no=c.clazz_no;
+给student 和clazz指定别名，条件是student的clazz_no字段和clazz的clazz_no字段相等， 他们相同的字段要指定
+是哪一张表的。也可以
+select name,age,s.clazz_no,department_name from student s,clazz as c where s.clazz_no=c.clazz_no;
+
+
+ 
+select t.ordinary_work_score,t.main_work_score,t.attendance_score,d.test_score from course_detail_score d left join course_score_record t on d.course_score_id=t.course_score_id and d.course_score_id in (select r.course_score_id from course_score_relation r where  r.stu_number='13130110075' and r.course_number in (select stu_course.course_number from stu_course where stu_course.stu_number='13130110075'));
+
+--------------------------------------

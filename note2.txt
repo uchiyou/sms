@@ -1,0 +1,54 @@
+
+
+--------------------------------------
+只根据学号在学生表中查询学生成绩，
+在 course_detail_score 和course_score_record 表中查询，它们的course_score_id主键依赖学生表和课程表，通过学号找出该学生的课程号，从而找出course_score_id
+
+select t.ordinary_work_score,t.main_work_score,t.attendance_score,d.test_score from course_detail_score d,course_score_record t where d.course_score_id=t.course_score_id and d.course_score_id in (select r.course_score_id from course_score_relation r where  r.stu_number='13130110075' and r.course_number in (select stu_course.course_number from stu_course where stu_course.stu_number='13130110075'));
+------------------------------------------------
+根据课程号和学号在学生表中查询学生成绩，在 course_detail_score 和course_score_record 表中查询，它们的course_score_id主键依赖学生表和课程表
+
+
+
+select t.ordinary_work_score,t.main_work_score,t.attendance_score,d.test_score from course_detail_score d,course_score_record t where d.course_score_id=t.course_score_id and d.course_score_id in (select r.course_score_id from course_score_relation r where  r.stu_number=? and r.course_number=?));
+-------------------------------------------------------
+根据课程号和班级号在学生表中查询学生成绩，在 course_detail_score 和course_score_record 表中查询，它们的course_score_id主键依赖学生表和课程表，
+
+select t.ordinary_work_score,t.main_work_score,t.attendance_score,d.test_score,student.stu_number from course_detail_score d,course_score_record t,student where d.course_score_id=t.course_score_id and d.course_score_id in (select r.course_score_id from course_score_relation r where r.course_number=1000 and r.stu_number in (select student.stu_number from student where student.class_number=13011) and student.stu_number in (select student.stu_number from student where student.class_number=13011));
+
+---------------------------------------
+自动生成course_record_relation
+course_number决定class_number
+select course_number,class_number from course,class where course_number in () 
+
+
+insert into course_record_relation values(?,?,?);
+
+
+stu_number决定course_number
+自动生成course_score_relation
+select stu_number,course_number from student,course where 
+insert into course_score_id values(?,?,?);
+
+-----------------------------------------
+查询某课程考试结构
+1 获取小题基本信息，没有所在章节信息
+select dq.main_question_id,dq.detail_question_number,dq.score,dq.easy_level,dq.type from detail_question dq where dq.main_question_id in (select main_question_id from main_question where course_number=1000);
+2 获取某一个小题所在章节信息
+select chapter_id from knowledegInOutline where detail_question_id=?;
+
+------------------------
+根据小题号查询小题得分情况:
+
+select dqs.detail_question_id,dqs.score from detail_question_score as dqs where dqs.detail_question_id=?;
+----------------------------------------------
+
+根据工资号和课程号查询班级的某个课程得分(分步查询)
+1 根据工资号和课程号找出相应的班级号
+2 根据相应的班级号和课程号找出课程记录，根据课程记录找出班级的平均成绩
+1
+select c.class_number from class c where c.class_number in (select tc.class_number from teacher_class tc where tc.wage_number=?) and c.class_number in (select class_number from course_record_relation as crr where crr.course_number=?)
+
+2
+select a,b,c,d from course_score_range as cs,class where cs.course_record_id in (select crr.course_record_id from course_record_relation as crr where crr.course_number=? and crr.class_number=?)
+-------------------------------------------------------------------------------------------------------
