@@ -25,9 +25,13 @@ public class StudentManageServlet extends HttpServlet {
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		if(!Server.checkLogin(request, response)) 
+			return;
+		
+		
 		HttpSession session=request.getSession();
 		TeacherBean teacher=(TeacherBean) session.getAttribute("teacher");
-		
+	    		
 		ArrayList<StudentCourseScoreBean> scoreList = new ArrayList<StudentCourseScoreBean>();
 		ArrayList<CourseBean> courseList;
 		try {

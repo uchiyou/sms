@@ -27,7 +27,7 @@ public class CourseRecordDao {
 		Object parameters[]={course_record_id,courseRecord.getSequence(),
 				courseRecord.getCourse_content(),courseRecord.getType(),course_number,
 				course_record_id};
-		MysqlTool.update(sql, parameters);	
+		MysqlTool.executeSql(sql, parameters);	
 	}
 
 }

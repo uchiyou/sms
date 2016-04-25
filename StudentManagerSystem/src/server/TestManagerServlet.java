@@ -30,6 +30,9 @@ public class TestManagerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		
+		if(!Server.checkLogin(request, response)) 
+			return;
+		
 				HttpSession session=request.getSession();
 				TeacherBean teacher=(TeacherBean) session.getAttribute("teacher");
 				

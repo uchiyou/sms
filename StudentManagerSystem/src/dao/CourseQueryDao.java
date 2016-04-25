@@ -16,6 +16,7 @@ public class CourseQueryDao {
 		Object parameters[]={wageNumber};
 		return (ArrayList<CourseBean>) MysqlTool.query(sql, parameters, new ListHander(CourseBean.class));
 	}
+	
 	public static CourseBean query(int course_number) throws SQLException{
 		String sql="select * from course where course_number=?";
 		Object parameters[]={course_number};
