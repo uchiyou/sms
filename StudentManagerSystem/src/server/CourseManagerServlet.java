@@ -20,10 +20,8 @@ public class CourseManagerServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*//设置一个session用来保存用户id
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		*/
+		if(!Server.checkLogin(request, response)) 
+			return;
 		HttpSession session=request.getSession();
 		TeacherBean teacher=(TeacherBean) session.getAttribute("teacher");
 		
@@ -43,7 +41,8 @@ public class CourseManagerServlet extends HttpServlet {
 		
 		
 		request.getRequestDispatcher("/courseManager.jsp").forward(request, response);
-	}
+		}
+	
 
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

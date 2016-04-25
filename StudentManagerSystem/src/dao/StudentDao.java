@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
 import org.junit.Test;
@@ -12,14 +13,16 @@ public class StudentDao {
 	
 
 	
-	public static void insert(StudentBean student) throws SQLException{
+	public static void insert(StudentBean student) throws Exception{
 		if(student==null)
-			return;
-		String sql="insert into student values('?','?','?','?','?')";
-		Object parameters[]={student.getStuNumber(),
-				student.getClassNumber(),student.getName(),
-				student.getSex(),student.getStuType()};
-		MysqlTool.update(sql, parameters);
+			throw new Exception("student is null : in SudentDao-line 18");
+		
+		/*String sql="insert into student values('?','?','?','?','?','?')";*/
+		String sql="insert into student values(?,?,?,?,?,?)";
+		Object parameters[]={student.getStuNumber(),student.getClassNumber(),
+				student.getName(),student.getSex(),
+				student.getStuType(),student.getPassword()};
+		MysqlTool.executeSql(sql, parameters);
 	}
 	
 	public static StudentBean query(String stuNumber) throws SQLException{
@@ -30,21 +33,20 @@ public class StudentDao {
 	 
 		return (StudentBean)MysqlTool.query(sql, parameters, new BeanHander(StudentBean.class));
 	}
-	public static void update(StudentBean student) throws SQLException{
+	public static void update(StudentBean student) throws SQLException, UnsupportedEncodingException{
 		if(student==null)
 			return;
-		String sql="update student set stu_number=?,class_number=?,name=?,sex=?,stu_type=? where stu_number=?";
+		String sql="update student set stu_number=?,class_number=?,name=?,sex=?,stu_type=?,password=? where stu_number=?";
 		Object parameters[]={student.getStuNumber(),
 				student.getClassNumber(),student.getName(),
-				student.getSex(),student.getStuType(),student.getStuNumber()};
-		MysqlTool.update(sql, parameters);
+				student.getSex(),student.getStuType(),student.getStuNumber(),student.getPassword()};
+		MysqlTool.executeSql(sql, parameters);
 	}
-/*	public static void delete(String stuNumber) throws SQLException{
+	public static void delete(String stuNumber) throws SQLException{
 		String sql="delete from student where stu_number=?";
 		Object parameters[]={stuNumber};
-		MysqlTool.update(sql, parameters);
+		MysqlTool.executeSql(sql, parameters);
 	}
-	若要删除一个学生，需要先删除所有对它有依赖关系的表
-	*/
+	
 
 }

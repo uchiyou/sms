@@ -6,8 +6,16 @@ public class StudentBean {
 	private String name;
 	private String sex;
 	private String stu_type;
+	private String password;
 	
 	
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public StudentBean() {
 		super();
 	}
@@ -27,7 +35,10 @@ public class StudentBean {
 	public String getStuNumber() {
 		return stu_number;
 	}
-	public void setStuNumber(String stuNumber) {
+	public void setStuNumber(String stuNumber) throws Exception {
+		if(!stuNumber.matches("[0|1|2]([0-9]{10})")){
+			throw new Exception("wageNumber illegel : in CourseQueryDao 17 lines");
+		}
 		this.stu_number = stuNumber;
 	}
 	public int getClassNumber() {
@@ -45,11 +56,16 @@ public class StudentBean {
 	public String getSex() {
 		return sex;
 	}
+	
 	public void setSex(String sex) throws Exception {
-		if(sex.equals("male")||sex.equals("female")||sex.equals("others"))
+		if("male".equals(sex)||"female".equals(sex)||"others".equals(sex)){
 			this.sex = sex;
-			else throw new Exception("student sex is error");
+	}else{ 
+		       System.out.println("error------->"+sex);
+				throw new Exception("student sex is error");
+			}
 	}
+	
 	public String getStuType() {
 		return stu_type;
 	}

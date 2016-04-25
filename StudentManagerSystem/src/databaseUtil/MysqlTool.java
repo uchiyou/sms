@@ -66,7 +66,7 @@ public class MysqlTool {
 				e.printStackTrace();
 			}
 	}
-	public static void update(String sql,Object[] parameters) throws SQLException{
+	public static void executeSql(String sql,Object[] parameters) throws SQLException{
 		Connection con=null;
 		PreparedStatement state=null;
 		
@@ -74,7 +74,7 @@ public class MysqlTool {
 			con=getConnection();
 			state=con.prepareStatement(sql);
 			
-			for(int i=0;i<parameters.length;i++){
+			for(int i=0;i<parameters.length;++i){
 				state.setObject(i+1, parameters[i]);
 			}
 			state.execute();//执行sql语句，可以是增，删，跟新
@@ -102,13 +102,14 @@ public class MysqlTool {
 			for(int i=0;i<parameters.length;i++){
 				//	System.out.println(parameters[i]);
 				state.setObject(i+1, parameters[i]);//如果设置成功了，为什么返回的是一个空的resultset
-			}
-		
+			}		
 			return rsh.hander(state.executeQuery());
 		}finally{
 			release(con,state,result);
 		}
 		}
+	
+	
 	public static HashMap<String,Object> queryMap(String sql,Object[] parameters) throws SQLException{
 		
 		Connection con=null;

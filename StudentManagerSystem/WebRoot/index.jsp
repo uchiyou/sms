@@ -189,18 +189,19 @@ function login(){
 <font size="8" color="#0000FF">成绩管理系统</font></h1>
 
        <div id="rightUp">
-                <span id="land">
-                       <font size="3"> 
-                      <a href="javascript:void(0)" onclick="loginSure(true)">登陆</a>
-                                                                              &nbsp|&nbsp注册
-                       &nbsp&nbsp&nbsp&nbsp</font>
-                 </span>
+               <!--  <span id="land"> -->
+                       
+                      <a id="signIn" href="javascript:void(0)" onclick="loginSure(true)"><font size="3"> 登陆</font></a>
+                                                                              &nbsp|&nbsp
+                    
+                        <a href="${pageContext.request.contextPath }/jsp/signUp.jsp">
+               <font size="3">
+              注册
+               </font>
+               </a>
+                       &nbsp&nbsp&nbsp&nbsp
+              <!--    </span> -->
                  
-                 
-         <%--   <!--    获取域中的javabean    -->
-                 <jsp:useBean id="teacher" class="domain.TeacherBean" scope="request"></jsp:useBean>
-                 
-               --%>   
                  
                  
                  <span id="suggest">
@@ -218,19 +219,18 @@ function login(){
                  
                  <span id="ourInfo">
                          <font size="3"> 
-                          退出&nbsp&nbsp&nbsp&nbsp</font>
+                         <a id="exitUser" href="${pageContext.request.contextPath }/servlet/Exit"> 退出</a>
+                          &nbsp&nbsp&nbsp&nbsp</font>
                   </span> 
                   <br/>
                     <div id="register">
                     <form action="${pageContext.request.contextPath }/servlet/LoginServlet" method="post">
-    	用户名：<input type="text" name="wageNumber"><br/>
+    	学号：<input type="text" name="wageNumber"><br/>
+    	密码  ：<input type="password" name="password" /><br/>
     	<input type="submit" value="登陆">
     </form>
                     <br/>
-                 <div id="registerOr">
-                <!--  <a href="javascript:void(0)" onclick="login()">登陆</a>
-                -->
-                 </div>
+                
                  </div>
                    
        </div>

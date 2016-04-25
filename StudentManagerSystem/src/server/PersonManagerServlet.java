@@ -17,11 +17,10 @@ public class PersonManagerServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	/*	//设置一个session用来保存用户id
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		OutputStream output=response.getOutputStream();
-		*/
+
+		if(!Server.checkLogin(request, response)) 
+			return;
+		
 		HttpSession session=request.getSession();
 		TeacherBean teacher=(TeacherBean) session.getAttribute("teacher");
 		request.setAttribute("teacher", teacher);		
