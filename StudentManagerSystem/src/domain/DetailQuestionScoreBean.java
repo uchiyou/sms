@@ -1,9 +1,11 @@
 package domain;
 
+import java.math.BigDecimal;
+
 public class DetailQuestionScoreBean {
 	private int detail_question_id;
-	private int score;
-	public DetailQuestionScoreBean(int detail_question_id, int score) {
+	private BigDecimal score;
+	public DetailQuestionScoreBean(int detail_question_id, BigDecimal score) {
 		super();
 		this.detail_question_id = detail_question_id;
 		this.score = score;
@@ -18,10 +20,10 @@ public class DetailQuestionScoreBean {
 	public void setDetail_question_id(int detail_question_id) {
 		this.detail_question_id = detail_question_id;
 	}
-	public int getScore() {
+	public BigDecimal getScore() {
 		return score;
 	}
-	public void setScore(int score) {
+	public void setScore(BigDecimal score) {
 		this.score = score;
 	}
 	

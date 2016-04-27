@@ -35,8 +35,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <%@ page language="java" import="domain.*" %>
- 
-<jsp:useBean id="teacher" scope="request" class="domain.TeacherBean" />
 <body>
 <center>
 <div id="head">
@@ -46,8 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div id="person">
 </div><table id="personInfo" width="500" border="1">
   <caption>
-    <span id="wageNumber">
-    <jsp:getProperty property="name" name="teacher"/>
+    <span id="personName">
     </span>个人信息
   </caption>
   <tr>
@@ -60,9 +57,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    职务</th>
   </tr>
   <tr>
-    <td><jsp:getProperty property="wage_number" name="teacher"/></td>
-    <td><jsp:getProperty property="name" name="teacher"/></td>
-    <td><jsp:getProperty property="job" name="teacher"/></td>
+    <td><textarea cols="20" rows="2" name="wageNumber" rows="10" ${modify }>${wageNumber }</textarea></td>
+    <td><textarea cols="20" rows="2" name="userName" rows="10" ${modify }>${userName }</textarea></td>
+    <td><textarea cols="20" rows="2" name="job" rows="10" ${modify }>${job }</textarea></td>   
   </tr>
   <tr>
   

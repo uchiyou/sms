@@ -15,16 +15,36 @@ import domain.TeacherBean;
 
 public class PersonManagerServlet extends HttpServlet {
 
+	public void setPersonInfo(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+		TeacherBean teacher=Server.getTeacher(request, response);
+		request.setAttribute("wageNumber", teacher.getWage_number());
+		request.setAttribute("userName", teacher.getName());
+		request.setAttribute("job", teacher.getJob());
+		
+		String modify="readonly='readonly'";
+		request.setAttribute("modify", modify);
+		
+	}
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if(!Server.checkLogin(request, response)) 
-			return;
 		
-		HttpSession session=request.getSession();
-		TeacherBean teacher=(TeacherBean) session.getAttribute("teacher");
-		request.setAttribute("teacher", teacher);		
-		request.getRequestDispatcher("/personManager.jsp").forward(request, response);
+		try {
+			if(!Server.checkLogin(request, response)) 
+				return;
+			setPersonInfo(request, response);
+			
+			request.getRequestDispatcher("/personManager.jsp").forward(request, response);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			request.setAttribute("errorInfo", "设置个人信息时不知道为什么出错了");
+			request.getRequestDispatcher("/error.jsp").forward(request, response);
+			
+		}
+			
+		
 	}
 
 	

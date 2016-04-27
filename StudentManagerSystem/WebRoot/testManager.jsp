@@ -100,12 +100,12 @@ xxx</span>
 <table id="knowledgeDistribute"width="800" border="1" summary="this is a test
 ">
   <caption>
-    <span id="courseId" class="course">xxx</span>课试卷知识点覆盖表  <input type="button" id="modifyKnowledgeDistribute" value="修改"/>
+    <span id="courseId" class="course">${curCourseName }</span>课试卷知识点覆盖表 <!--  <input type="button" id="modifyKnowledgeDistribute" value="修改"/> -->
   </caption>
   <tr>
     <th scope="col">大题号</th>
     <th scope="col">小题号</th>
-    <th scope="col">所在大纲章节</th>
+  <!--   <th scope="col">题目所属大纲章节</th> -->
     <th scope="col">标准题分</th>
     <th scope="col">难易程度</th>
     <th scope="col">题目类型</th>
@@ -115,7 +115,11 @@ xxx</span>
             <tr>    
                  <td><jsp:getProperty property="main_question_id" name="distribute"/></td>        
                  <td><jsp:getProperty property="detail_question_number" name="distribute"/></td>        
-                 <td><jsp:getProperty property="partInOutline" name="distribute"/></td>        
+                 <%-- <td>
+                 <c:forEach var="partInOutlineItem" items="<jsp:getProperty property='partInOutline' name='distribute'/>">
+                       ${partInOutlineItem } &nbsp;
+                  </c:forEach>
+                 </td>  --%>       
                  <td><jsp:getProperty property="score" name="distribute"/></td>        
                  <td><jsp:getProperty property="easy_level" name="distribute"/></td>        
                  <td><jsp:getProperty property="type" name="distribute"/></td>                    
@@ -127,7 +131,7 @@ xxx</span>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
+   <!--  <td>&nbsp;</td> -->
   </tr>
 </table>
 </div>
@@ -139,14 +143,14 @@ xxx</span>
 <br/><br/>
 
 
-
+<%-- 
 <div id="queryScore">
 <div id="averageQuery">
 <br/><br/>
 
 <table id="questionScoreAverage" width="800" border="1">
   <caption>
-  <span id="detailQestionScore" class="course">xxx</span>
+  <span id="detailQestionScore" class="course">${curCourseName }</span>
     题目得分统计
   </caption>
   <tr>
@@ -161,7 +165,7 @@ xxx</span>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
- <%--  <c:forEach var="course" items="${myCourse}">
+  <c:forEach var="course" items="${myCourse}">
  <jsp:useBean id="course" scope="request" class="domain.CourseBean" />
             <tr>    
                  <td><jsp:getProperty property="course_name" name="course"/></td>        
@@ -172,7 +176,7 @@ xxx</span>
                  <td><jsp:getProperty property="course_student" name="course"/></td>        
                  <td><jsp:getProperty property="course_direction" name="course"/></td>        
             </tr>        
-        </c:forEach> --%>
+        </c:forEach>
   
   <tr>
     <th scope="col">课程总做对比</th>
@@ -181,12 +185,12 @@ xxx</span>
     <td>&nbsp;</td>
   </tr>
 </table>
-
+ --%>
 
 <br/><br/><br/>
 <table id="scoreSpanAverage" width="800" border="1">
   <caption>
-  <span id="scoreDistributeCourse" class="course">xxx</span>
+  <span id="scoreDistributeCourse" class="course">${curCourseName }</span>
     成绩区间分布统计
   </caption>
   <tr>
@@ -195,47 +199,35 @@ xxx</span>
     <th scope="col">B[71-85]</th>
     <th scope="col">C[61-70]</th>
     <th scope="col">D[0-59]</th>
-    <th scope="col">平均分</th>
+    <!-- <th scope="col">平均分</th> -->
   </tr>
- <%  int count=0,suma=0,sumb=0,sumc=0,sumd=0,sum=0; %>
+ 
   <c:forEach var="score" items="${scoreList}">
  <jsp:useBean id="score" scope="request" class="domain.ScoreRangeBean" />
             <tr>    
-                 <td><jsp:getProperty property="class_number" name="score"/></td>        
+                 <td><jsp:getProperty property="class_number" name="score"/>
+                 </td>        
                  <td><jsp:getProperty property="a" name="score"/></td>        
                  <td><jsp:getProperty property="b" name="score"/></td>        
                  <td><jsp:getProperty property="c" name="score"/></td>        
                  <td><jsp:getProperty property="d" name="score"/></td>        
-                 <td>
+                <!--  <td>
+                 </td> -->   
+            </tr> 
                  
-                 <% 
-                 sum=(score.getA()+score.getB()+score.getC()+score.getD())/4;
-                 count++;
-                 suma+=score.getA();
-                 sumb+=score.getB();
-                 sumc+=score.getC();
-                 sumd+=score.getD();
-                  %>
-                 
-                 </td>   
-            </tr>        
         </c:forEach>
   
    <tr>
    
-    <th scope="col">课程总平均</th>
-    <td id="AscoreEnd">${suma/count}</td>
-    <td id="BscoreEnd">${sumb/count }</td>
-    <td id="CscoreEnd">${sumc/count }</td>
-    <td id="DscoreEnd">${sumd/count }</td>
-    <td id="scoreClassAverageEnd">${sum/count}</td>
+    <th scope="col">平均人数</th>
+    <td id="AscoreEnd">${aa}</td>
+    <td id="BscoreEnd">${ba }</td>
+    <td id="CscoreEnd">${ca }</td>
+    <td id="DscoreEnd">${da }</td>
+    <%-- <td id="scoreClassAverageEnd">${(aa+ba+ca+da)/4}</td> --%>
   </tr>
 </table>
 
-</div>
-
-
-</div>
 
 <a href="${pageContext.request.contextPath}/index.jsp">
 <font color="007777" size='4'>
