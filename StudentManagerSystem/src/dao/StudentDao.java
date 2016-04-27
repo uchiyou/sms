@@ -19,9 +19,9 @@ public class StudentDao {
 		
 		/*String sql="insert into student values('?','?','?','?','?','?')";*/
 		String sql="insert into student values(?,?,?,?,?,?)";
-		Object parameters[]={student.getStuNumber(),student.getClassNumber(),
+		Object parameters[]={student.getStu_number(),student.getClass_number(),
 				student.getName(),student.getSex(),
-				student.getStuType(),student.getPassword()};
+				student.getStu_type(),student.getPassword()};
 		MysqlTool.executeSql(sql, parameters);
 	}
 	
@@ -37,9 +37,9 @@ public class StudentDao {
 		if(student==null)
 			return;
 		String sql="update student set stu_number=?,class_number=?,name=?,sex=?,stu_type=?,password=? where stu_number=?";
-		Object parameters[]={student.getStuNumber(),
-				student.getClassNumber(),student.getName(),
-				student.getSex(),student.getStuType(),student.getStuNumber(),student.getPassword()};
+		Object parameters[]={student.getStu_number(),
+				student.getClass_number(),student.getName(),
+				student.getSex(),student.getStu_type(),student.getStu_number(),student.getPassword()};
 		MysqlTool.executeSql(sql, parameters);
 	}
 	public static void delete(String stuNumber) throws SQLException{

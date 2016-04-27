@@ -1,3 +1,4 @@
+
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -18,10 +19,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <jsp:useBean id="courseRecordList" scope="request" class="domain.CourseRecordBean" />
 
  --%><%@ page language="java" import="java.util.ArrayList" %>
-<%-- <jsp:useBean id="myCourse" scope="request" class="domain.CourseBean" /> --%>
+ 
 
 
 <body>
+
+
 <center>
 <div id="head">
 <h1>
@@ -29,11 +32,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </h1>
 </div>
 
-<div id="mycourse">
+<div id="mycourseDiv">
 
 <table id="courseInfo" width="600" border="1">
   <caption>
-    我的课程
+    ${curUser }课程
   </caption>
   <tr>
     <th scope="col">课程名称</th>
@@ -45,10 +48,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <th scope="col">开设方向</th>
   </tr>
 <!-- 遍历一个集合里面的javabean   -->
- <c:forEach var="course" items="${myCourse}">
+ <c:forEach var="course" items="${courseList}">
  <jsp:useBean id="course" scope="request" class="domain.CourseBean" />
             <tr>    
-                 <td><jsp:getProperty property="course_name" name="course"/></td>        
+                <td><jsp:getProperty property="course_name" name="course"/></td>        
                  <td><jsp:getProperty property="course_number" name="course"/></td>        
                  <td><jsp:getProperty property="course_type" name="course"/></td>        
                  <td><jsp:getProperty property="course_duration" name="course"/></td>        
@@ -66,20 +69,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 
-
 <div id="courseRecord">
-<select id="chooseCourse">
-                         
+
+
+
+
+<form id="chooseCourseFormId" action="${pageContext.request.contextPath }/servlet/CourseManagerServlet" method="post">
+<input type="hidden" name="chooseCourseRecord" value="choiceCourse"/>
+<select name="chooseCourse">
+                        <c:forEach var="courseBean" items="${courseList}">
+                        <jsp:useBean id="courseBean" scope="request" class="domain.CourseBean" />              
+                         <option value="<jsp:getProperty property='course_number' name='courseBean'/>">
+                         <jsp:getProperty property="course_name" name="courseBean"/>
+                         </option>
+        </c:forEach>            
 </select>
-<table width="400" border="1">
+<input type="submit" value="提交"/>
+</form>
+
+
+
+
+
+<form id="insertCourseRecord" action="${pageContext.request.contextPath }/servlet/CourseManagerServlet" method="post">
+
+<table width="600" border="1">
   <caption>
   <span id="record_courseId" class="course"></span>
-    课程实施记录
+                         ${curCourseName }课程实施记录
   </caption>
   <tr>
     <th scope="col">序号</th>
     <th scope="col">讲授内容</th>
-    <th scope="col">课程形式</th>
+    <th scope="col">课程形式</th>   
   </tr>
   
  <c:forEach var="record" items="${courseRecord}">
@@ -87,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <tr>    
                  <td><jsp:getProperty property="sequence" name="record"/></td>        
                  <td><jsp:getProperty property="course_content" name="record"/></td>        
-                 <td><jsp:getProperty property="type" name="record"/></td>                
+                 <td><jsp:getProperty property="type" name="record"/></td>
             </tr>        
         </c:forEach>
   
@@ -95,24 +117,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td>请输入最新课程记录</td>
   </tr>
    <tr>
-    <td><input type="text" id="orderNumber" /></td>
-    <td><input type="text" id="teacherContent"/></td>
+    <td><textarea name="orderNumber" rows="10" readonly="readonly">${recordSequence }</textarea></td>
+    <td><textarea cols="60" rows="10" name="teacherContent"></textarea></td>
     <td>
-    <select id="courseType">
-                         <option value="teach">讲授</option>
-                         <option value="exercise">习题讲解</option>
-                         <option value="quit">随堂检测</option>
-                         <option value="review">复习课程</option>
-                         
+    <select name="courseType">
+    <!-- set('lecture','solve exercise','course test','review')  -->
+                         <option value="lecture">讲授</option>
+                         <option value="solve exercise">习题讲解</option>
+                         <option value="course test">随堂检测</option>
+                         <option value="review">复习课程</option>                         
 </select>
     </td>
   </tr>
-   <tr>
-    <td><input type="submit" id="submit" text="提交" /></td>
+   <tr>  
+    <td>
+      <input type="hidden" name="courseRecordHidden" value="courseRecordHidden"/>
+      <input type="hidden" name="courseNumber2" value="${curCourse }"/>
+      <input type="hidden" name="curCourseRecordId" value="${curCourseRecordId }"/>
+    <input type="submit" id="submit" value="确认插入" />   
+    </td>
+    <td><font color="0x006600">
+    ${insertCourseRecordInfo } 
+    </font>
+    </td>
   </tr>
 </table>
+</form>
 
 </div>
+
+<a href="${pageContext.request.contextPath}/index.jsp">
+<font color="007777" size='4'>
+回到主界面
+</font>
+</a>
 
 
 </center>

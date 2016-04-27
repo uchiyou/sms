@@ -25,30 +25,11 @@ function showStudentInfo(radioId){
 <center>
        <div id="login">
         <form action="${pageContext.request.contextPath }/servlet/SignUp" method="post">
-        <c:choose>
-               <c:when test="${signUp=='userExist'}"> 
-                         <font color="0x00ff00"> 
-                                                                                                                 账号已存在<br/>
-                         </font> 
-               </c:when>
-               <c:when test="${signUp=='unmatch'}">
-                      <font color="0x00ff00"> 
-                                                                                           输入格式不正确<br/>
-                         </font> 
-              </c:when>
-               <c:when test="${signUp=='none'}">
-                      <font color="0x00ff00"> 
-                                                                                           请填写完整<br/>
-                         </font> 
-              </c:when>
-             
-         </c:choose>
-        
-        
-    	学号 &nbsp ：<input type="text" name="wageNumber"><br/>
-    	用户名 ：<input type="text" name="userName"><br/>
-    	 密码  &nbsp ：    <input type="password" name="password"><br/>
-    	确认 密码：    <input type="password" name="password2"><br/>
+                 <font color="0x008800"> ${signUp}</font><br/>
+    	学号 &nbsp ：<input type="text" name="wageNumber" value="${wageNumber}"><br/>
+    	用户名 ：<input type="text" name="userName" value="${userName}"><br/>
+    	 密码  &nbsp ：    <input type="password" name="password" value="${password }"><br/>
+    	确认 密码：    <input type="password" name="password2" value="${password2 }"><br/>
     	 身份 &nbsp ：   <input type=radio name="job" value="student" onclick="showStudentInfo(this)" >学生</input>
                    <input type=radio name="job" value="teacher" onclick="showStudentInfo('student')" checked>讲师</input>
                    <input type=radio name="job" value="professor" onclick="showStudentInfo('student')">教授</input>
@@ -68,7 +49,14 @@ function showStudentInfo(radioId){
     	<input type="submit" value="确认注册"/>
     </form>
   </div>
+  
+  
+<a href="${pageContext.request.contextPath}/index.jsp">
+<font color="007777" size='4'>
+回到主界面
+</font>
+</a>
+  
 </center>
-
 </body>
 </html>

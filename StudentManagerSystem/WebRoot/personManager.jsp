@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <caption>
     <span id="wageNumber">
     <jsp:getProperty property="name" name="teacher"/>
-    </span>老师个人信息
+    </span>个人信息
   </caption>
   <tr>
     <th scope="col">
@@ -65,6 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td><jsp:getProperty property="job" name="teacher"/></td>
   </tr>
   <tr>
+  
   <center>
     <td border="0"><input type="submit" id="submit" name="modify" value="修改"/></td>
     </center>

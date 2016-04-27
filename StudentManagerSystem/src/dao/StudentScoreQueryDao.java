@@ -39,7 +39,7 @@ public class StudentScoreQueryDao {
 			StudentCourseScoreBean s=it.next();
 			s.setOrderScore(getOrderScore(s));
 		}}
-		return score;
+		return score==null?new ArrayList<StudentCourseScoreBean>():score;
 	}
 	private static int getOrderScore(StudentCourseScoreBean score){
 		return (score.getAttendance_score()+score.getMain_work_score()+
