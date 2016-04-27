@@ -29,17 +29,17 @@ public class TestManagerServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		
-		if(!Server.checkLogin(request, response)) 
-			return;
-		
-				HttpSession session=request.getSession();
-				TeacherBean teacher=(TeacherBean) session.getAttribute("teacher");
-				
-				
 				//get the all info
 				ArrayList<KnowledgeDistributeBean> distribute;
 				try {
+					if(!Server.checkLogin(request, response)) 
+						return;
+					TeacherBean teacher=Server.getTeacher(request, response);
+					if(teacher==null)// 账号异常情况，将会在 Server中发生跳转
+				    	return;
+					
+			        Integer chooseCourse= Server.getTeacherCourse(request, response, teacher);
+					
 					
 					
 					
@@ -56,15 +56,18 @@ public class TestManagerServlet extends HttpServlet {
 			        request.setAttribute("scoreList", scoreList);
 					
 			    //  ArrayList<DetailQuestionScoreBean> questionQuestionList=TestManagerUtil.queryDetailQuestionScore(course.getCourse_number());
-					
+
+					request.getRequestDispatcher("/testManager.jsp").forward(request, response);
 					
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+
+					request.setAttribute("errorInfo", "testManager 不知道在什么地方出错了");
+					request.getRequestDispatcher("/error.jsp").forward(request, response);
 				}//get the information from databases
 				
 				
-				request.getRequestDispatcher("/testManager.jsp").forward(request, response);
 
 	}
 

@@ -19,33 +19,33 @@ public class StudentBean {
 	public StudentBean() {
 		super();
 	}
-	public StudentBean(String stuNumber, int classNumber, String name,
-			String sex, String stuType) throws Exception {
+	public StudentBean(String stu_number, int class_number, String name,
+			String sex, String stu_type) throws Exception {
 		super();
-		this.stu_number = stuNumber;
-		this.class_number = classNumber;
+		this.stu_number = stu_number;
+		this.class_number = class_number;
 		this.name = name;
 		if(sex.equals("male")||sex.equals("female")||sex.equals("others"))
 		this.sex = sex;
 		else throw new Exception("student sex is error");
-		if(stuType.equals("postgraduate")||stuType.equals("undergraduate"))
-			this.stu_type = stuType;
+		if(stu_type.equals("postgraduate")||stu_type.equals("undergraduate"))
+			this.stu_type = stu_type;
 			else throw new Exception("student type in student errors");
 	}
-	public String getStuNumber() {
+	public String getStu_number() {
 		return stu_number;
 	}
-	public void setStuNumber(String stuNumber) throws Exception {
-		if(!stuNumber.matches("[0|1|2]([0-9]{10})")){
+	public void setStu_number(String stu_number) throws Exception {
+		if(!stu_number.matches("[0|1|2]([0-9]{10})")){
 			throw new Exception("wageNumber illegel : in CourseQueryDao 17 lines");
 		}
-		this.stu_number = stuNumber;
+		this.stu_number = stu_number;
 	}
-	public int getClassNumber() {
+	public int getClass_number() {
 		return class_number;
 	}
-	public void setClassNumber(int classNumber) {
-		this.class_number = classNumber;
+	public void setClass_number(int class_number) {
+		this.class_number = class_number;
 	}
 	public String getName() {
 		return name;
@@ -66,12 +66,12 @@ public class StudentBean {
 			}
 	}
 	
-	public String getStuType() {
+	public String getStu_type() {
 		return stu_type;
 	}
-	public void setStuType(String stuType) throws Exception {
-		if(stuType.equals("postgraduate")||stuType.equals("undergraduate"))
-			this.stu_type = stuType;
+	public void setStu_type(String stu_type) throws Exception {
+		if(stu_type.equals("postgraduate")||stu_type.equals("undergraduate"))
+			this.stu_type = stu_type;
 			else throw new Exception("student type in student errors");
 	}
 

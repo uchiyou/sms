@@ -51,23 +51,9 @@ function check(node,pattern,behind,tip){
 </script>
 <center>
        <div id="login">
+      <font color="0x008800">${loginInfo}</font><br/>
+        
         <form action="${pageContext.request.contextPath }/servlet/LoginServlet" method="post">
-        
-        <c:choose>
-               <c:when test="${online!='online'&&signUp!='signUp'}"> 
-                         <font color="0x00ff00"> 
-                                                                                            用户名或密码错误<br/>
-                         </font> 
-               </c:when>
-               <c:when test="${signUp=='signUp'}">
-                      <font color="0x00ff00"> 
-                                                                                           註冊成功，請登陸<br/>
-                         </font> 
-              </c:when>
-             
-         </c:choose>
-        
-        
     	用户名：<input type="text" name="wageNumber" onmousemove="check(this,'\d{3-11}','userNumberTip','输入错误,3-11位数字')" />
     	<font color="0x00ff00"><span id="userNumberTip"></span></font>
     	<br/>
@@ -84,6 +70,14 @@ function check(node,pattern,behind,tip){
         </form>
     </div>
   </div>
+  
+  
+<a href="${pageContext.request.contextPath}/index.jsp">
+<font color="007777" size='4'>
+回到主界面
+</font>
+</a>
+  
 </center>
 </body>
 </html>

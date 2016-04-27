@@ -2,10 +2,12 @@ package domain;
 
 public class CourseRecordBean {
 	
-	
+	private int course_record_id;
 	private int sequence;
 	private String course_content;
 	private String type;
+	private int course_number;
+	
 
 	public CourseRecordBean() {
 		super();
@@ -42,6 +44,26 @@ public class CourseRecordBean {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+
+	public int getCourse_record_id() {
+		return course_record_id;
+	}
+
+
+	public void setCourse_record_id(int course_record_id) {
+		this.course_record_id = course_record_id;
+	}
+
+
+	public int getCourse_number() {
+		return course_number;
+	}
+
+
+	public void setCourse_number(int course_number) {
+		this.course_number = course_number;
 	}
 	
 

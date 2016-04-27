@@ -1,5 +1,4 @@
-/dao
-/databaseUtil
 /server
-/filter
 /domain
+/dao
+/filter

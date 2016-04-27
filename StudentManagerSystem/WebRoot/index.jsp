@@ -180,6 +180,7 @@ function login(){
 <%@ page language="java" import="domain.*" %>
  
 <jsp:useBean id="teacher" scope="request" class="domain.TeacherBean" />
+<jsp:useBean id="student" scope="request" class="domain.StudentBean"/>
  <%-- 
      上面这两段是导入自定义java类，并声明所要使用的类
  --%>
@@ -206,14 +207,7 @@ function login(){
                  
                  <span id="suggest">
                         <font size="3"> 你好 ：
-                        
-                       <%
-                       if(teacher!=null&&teacher.getName()!=null){
-                      out.print(teacher.getName()+" "+teacher.getJob());
-                       }else {
-                       out.print("游客");
-                       }
-                        %>
+                      ${curUser}
                          &nbsp&nbsp&nbsp&nbsp</font>
                  </span>
                  

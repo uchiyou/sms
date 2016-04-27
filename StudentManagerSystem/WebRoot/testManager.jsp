@@ -48,49 +48,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 
 
+ <jsp:useBean id="course" scope="request" class="domain.CourseBean" />
 
-<script type="text/javascript">
-//这段javascript应该想服务端发送请求刷新页面
-var course=[['选择课程'],
-           ['海定区','朝阳区','东城区','西城区'],
-		   ['长沙','邵阳','岳阳','湘潭'],
-		   ['深圳','东莞','广州','佛山'],
-		   ['西安','咸阳','安康','渭成']];
-		   
-		 
-		 function chooseCourse(){
-			   //获取两个个选择区
-			   var choose=document.getElementById("chooseCourse");
-			   var subsel=document.getElementById("subsel");
-			   //获取用户所选择的省市
-			   var index=sel.selectedIndex;
-			     
-			   //获取该区的城市数组，　　　　　　　　　　　数组直接赋值
-			   var cs=course[index];
+<form id="chooseCourseFormId" action="${pageContext.request.contextPath }/servlet/TestManagerServlet" method="post">
+<input type="hidden" name="chooseCourseRecord" value="choiceCourse"/>
+<select name="chooseCourse">
+<!-- if we use id like <select id="chooseCourse">
+     then we can get the select value in the server
 
-			   //遍历该数组，并把所有的城市添加到子选区中
-			   for(var i=0;i<cs.length;i++){
-				   //创建option节点
-				   var opt=document.createElement("option");
-				   opt.innerHTML=cs[i];
-				   opt.value=cs[i];
-				   
-				   subsel.appendChild(opt);
-			   }
-		   }
-				   
-				   
-			   
-</script>
-
-<select id="chooseCourse" onchange="chooseCourse()">
-                         <option value="">选择课程</option>
-                         <option value="database">数据库</option>
-                         
+ -->
+              <c:forEach var="course2" items="${courseList}">
+               <jsp:useBean id="course2" scope="request" class="domain.CourseBean" />              
+            <option value="<jsp:getProperty property='course_number' name='course2'/>">
+            <jsp:getProperty property="course_name" name="course2"/>
+            </option> 
+        </c:forEach>
 </select>
+<input type="submit" value="提交"/>
+</form>
+
+
+
 <br/><br/>
 
-
+<%-- 
 
 
 课程总平均分：<span id="courseScoreAverage">xxx</span><br/><br/>
@@ -108,7 +89,7 @@ xxx</span>
 </b>
 </listing> 
 </center>
-</div>
+</div> --%>
 
 
 
@@ -119,7 +100,7 @@ xxx</span>
 <table id="knowledgeDistribute"width="800" border="1" summary="this is a test
 ">
   <caption>
-    <span id="courseId" class="course">xxx</span>课试卷知识点覆盖表  <input type="buttion" id="modifyKnowledgeDistribute" value="修改"/>
+    <span id="courseId" class="course">xxx</span>课试卷知识点覆盖表  <input type="button" id="modifyKnowledgeDistribute" value="修改"/>
   </caption>
   <tr>
     <th scope="col">大题号</th>
@@ -255,6 +236,12 @@ xxx</span>
 
 
 </div>
+
+<a href="${pageContext.request.contextPath}/index.jsp">
+<font color="007777" size='4'>
+回到主界面
+</font>
+</a>
 
 </center>
 </body>

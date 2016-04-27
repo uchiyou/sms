@@ -44,24 +44,24 @@ public class SignUpServlet extends HttpServlet{
 				||"".equals(req.getParameter("job"))||"".equals(req.getParameter("job").trim())
 				||"".equals(req.getParameter("password"))||"".equals(req.getParameter("password").trim())
 				){
-			req.setAttribute("signUp", "none");
+			req.setAttribute("signUp", "请填写完整的信息");
 			req.getRequestDispatcher("/jsp/signUp.jsp").forward(req, resp);
 			return;
 		}
 		
 		
 		if(PersonDao.query(wageNumber)!=null||StudentDao.query(wageNumber)!=null){
-			req.setAttribute("signUp", "userExist");
+			req.setAttribute("signUp", "用户已经存在");
 			req.getRequestDispatcher("/jsp/signUp.jsp").forward(req, resp);
 			return;
 		}
 		if(wageNumber.matches("[0|1|2]([0-9]{10})")){
 			student=new StudentBean();
-			student.setStuNumber(wageNumber);
+			student.setStu_number(wageNumber);
 			student.setName(req.getParameter("userName"));
-			student.setClassNumber(Integer.parseInt(req.getParameter("classNumber")));
+			student.setClass_number(Integer.parseInt(req.getParameter("classNumber")));
 			student.setSex(req.getParameter("gender"));
-			student.setStuType(req.getParameter("studentType"));
+			student.setStu_type(req.getParameter("studentType"));
 			student.setPassword(req.getParameter("password"));
 			
 			StudentDao.insert(student);
@@ -75,16 +75,17 @@ public class SignUpServlet extends HttpServlet{
 		PersonDao.insert(teacher);
 		}
 		
-		req.setAttribute("signUp", "signUp");
+		req.setAttribute("loginInfo", "注册成功，请登陆");
 		req.getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
 		
 		}catch(SQLException e){
 		e.printStackTrace();
-	
+		req.setAttribute("signUp", "注册信息不正确,请仔细检查");
+	    req.getRequestDispatcher("/jsp/signUp.jsp").forward(req, resp);
 	}catch(Exception e){
 			e.printStackTrace();
 			System.out.println("-------------->"+e.getMessage());
-			req.setAttribute("signUp", "unmatch");
+			req.setAttribute("errorInfo", "不好意思，注册时粗错鸟~~");
 			req.getRequestDispatcher("/error.jsp").forward(req, resp);
 			
 		}
