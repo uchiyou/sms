@@ -1,25 +1,21 @@
 package server;
 
 import java.io.IOException;
-import java.net.HttpCookie;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.CourseQueryDao;
-import dao.CourseRecordDao;
 import dao.PersonDao;
 import dao.StudentDao;
 import dao.StudentScoreQueryDao;
 import domain.CourseBean;
-import domain.CourseRecordBean;
 import domain.StudentBean;
 import domain.StudentCourseScoreBean;
 import domain.TeacherBean;
@@ -49,34 +45,40 @@ public class StudentManageServlet extends HttpServlet {
 	private void dealBottomPart(HttpServletRequest request, HttpServletResponse response,String smpart)
 			throws ServletException, IOException, SQLException {
 		int classNumber=-1;
-		int choiceCourse=-1;
+		int chooseCourse=-1;
 		
 		if(smpart!=null)
 		if(smpart.equals("2")){
-			if(request.getParameter("ClassNumber")==null||"".equals(request.getParameter("ClassNumber"))){
+			String classNUmberStr=request.getParameter("ClassNumber");
+			if(classNUmberStr==null||"".equals(classNUmberStr)){
 				
 			}else{
-				classNumber=Integer.parseInt(request.getParameter("ClassNumber"));	
+				if(classNUmberStr.matches("[0-9]{5}"))
+				classNumber=Integer.parseInt(request.getParameter("ClassNumber"));
+				else
+				request.setAttribute("classInfo", "班级号格式输入不正确");
+				
 			}
 			
-			choiceCourse=Integer.parseInt(request.getParameter("chooseCourse"));
-		}
-		
+			chooseCourse=Integer.parseInt(request.getParameter("chooseCourse"));
+		}	
 		
 	// the follow table
 	ArrayList<StudentCourseScoreBean> scoreList = new ArrayList<StudentCourseScoreBean>();
-	ArrayList<CourseBean> courseList;
+	LinkedList<CourseBean> courseList=new LinkedList<CourseBean>();
+	
 	    TeacherBean teacher=Server.getTeacher(request, response);
 	    if(teacher==null)// 账号异常情况，将会在 Server中发生跳转
 	    	return;
 		
-		courseList = CourseQueryDao.queryTeacherCourses(teacher.getWage_number());
-		request.setAttribute("courseList", courseList);
-		CourseBean course=choiceCourse==-1?courseList.get(0):CourseQueryDao.query(choiceCourse);
+		courseList.addAll(CourseQueryDao.queryTeacherCourses(teacher.getWage_number()));		
+		CourseBean course=chooseCourse==-1?courseList.get(0):CourseQueryDao.query(chooseCourse);
 		
+		Server.setCourseListOrder(courseList, chooseCourse);
+		request.setAttribute("courseList", courseList);
 		request.setAttribute("defaultCourse", course);
-		ArrayList<Integer> myclass=PersonDao.getClass(teacher.getWage_number());
-		Iterator<Integer> it=myclass.iterator();
+		
+		ArrayList<Integer> myclass=PersonDao.getClass(teacher.getWage_number());		
 		if(classNumber!=-1){
 			ArrayList<StudentCourseScoreBean> studentSocre=StudentScoreQueryDao.query(course.getCourse_number(), classNumber);
 			if(studentSocre!=null)
@@ -84,6 +86,7 @@ public class StudentManageServlet extends HttpServlet {
 			else
 			request.setAttribute("classInfo", "不存在与该课程对应的班级");
 		}else{
+		Iterator<Integer> it=myclass.iterator();
 		while(it.hasNext()){		
 			scoreList.addAll(StudentScoreQueryDao.query(course.getCourse_number(), it.next()));	
 		

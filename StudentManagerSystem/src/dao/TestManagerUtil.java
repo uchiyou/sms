@@ -60,19 +60,25 @@ public class TestManagerUtil {
 		 */
 		String sql="select dq.main_question_id,dq.detail_question_number,dq.score,dq.easy_level,dq.type from detail_question dq where dq.main_question_id in (select main_question_id from main_question where course_number=?)";
 		Object[] parameters={course_number};
-		ArrayList<KnowledgeDistributeBean> distributes=(ArrayList<KnowledgeDistributeBean>) MysqlTool.query(sql, parameters, new ListHander(KnowledgeDistributeBean.class));
+		ArrayList<KnowledgeDistributeBean> distributes=new ArrayList<KnowledgeDistributeBean>();
+		ArrayList<KnowledgeDistributeBean> td=(ArrayList<KnowledgeDistributeBean>) MysqlTool.query(sql, parameters, new ListHander(KnowledgeDistributeBean.class));
+		if(td!=null)
+		distributes.addAll(td);
 		
 		/*
 		 * 获取某一个小题所在大纲知识点章节
 		 */
-		if(distributes==null){
-			return null;
-		}
-		Iterator<KnowledgeDistributeBean> it=distributes.iterator();
-		while(it.hasNext()){
+		int size=distributes.size();
+		int j=0;
+		for(j=0;j<size;++j){
 		String getInOutlineSql="select chapter_id from knowledgeinoutline where detail_question_id=?";
-		KnowledgeDistributeBean bean=it.next();
-		Object[] parameters2={bean.getDetail_question_number()};
+	/* 这里需要完善，因为数据库里课程的 id 和小题的 id 目前没有建立直接的联系，只有一科课程有小题*****
+	 * 
+	 * 
+	 * */
+		Object[] parameters2={j+1};
+		
+		
 		ArrayList<Object> temp=(MysqlTool.queryList(getInOutlineSql, parameters2));
 		
 		if(temp!=null){
@@ -81,10 +87,12 @@ public class TestManagerUtil {
 		for(Object i:temp){
 			tt.add((Integer) i);
 		}
-		bean.setPartInOutline(tt);
+		distributes.get(j).setPartInOutline(tt);
 		}
+		}
+	//	}
 		
-		}
+		
 		return distributes.size()>0?distributes:null;
 	}
 	
@@ -144,12 +152,12 @@ select a,b,c,d from course_score_range as cs,class where cs.course_record_id in 
 		Iterator<Object> it=classList.iterator();
 		while(it.hasNext()){
 			Integer class_number=(Integer) it.next();
-			String sqlScore="select a,b,c,d from course_score_range as cs,class where cs.course_record_id in (select crr.course_record_id from course_record_relation as crr where crr.course_number=? and crr.class_number=?)";
+			String sqlScore="select course_record_id,a,b,c,d from course_score_range as cs,class where cs.course_record_id in (select crr.course_record_id from course_record_relation as crr where crr.course_number=? and crr.class_number=?)";
 		    Object[] parameters2={course_number,class_number};
 		   ScoreRangeBean sbean= (ScoreRangeBean) MysqlTool.query(sqlScore, parameters2, new BeanHander(ScoreRangeBean.class));
 		   if(sbean==null)
 			   continue;
-		   sbean.setCourse_record_id(class_number);
+		   sbean.setClass_number(class_number);
 		    list.add(sbean);
 		}
 		if(list==null){
