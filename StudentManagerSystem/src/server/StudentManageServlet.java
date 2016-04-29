@@ -21,7 +21,7 @@ import domain.StudentCourseScoreBean;
 import domain.TeacherBean;
 
 public class StudentManageServlet extends HttpServlet {
-	
+	// write by uchiyou
 	
 
 	private void dealTopPart(HttpServletRequest request, HttpServletResponse response,String smpart)

@@ -19,7 +19,7 @@ import domain.ScoreRangeBean;
 import domain.TeacherBean;
 
 public class TestManagerServlet extends HttpServlet {
-
+	// write by uchiyou
 	
 	/**
 	 * 

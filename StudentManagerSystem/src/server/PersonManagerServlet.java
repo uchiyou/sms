@@ -14,7 +14,7 @@ import dao.PersonDao;
 import domain.TeacherBean;
 
 public class PersonManagerServlet extends HttpServlet {
-
+	// write by uchiyou
 	//设置信息给 jsp
 	private void setInfo(HttpServletRequest request,TeacherBean teacher,boolean modify)
 			throws Exception {
@@ -98,14 +98,15 @@ public class PersonManagerServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		
+			
+		
 		try {
 			// ------->use util class Server
 			if(!Server.checkLogin(request, response)) 
 				return;
 			TeacherBean teacher=Server.getTeacher(request, response);
 			if(teacher==null)// 账号异常情况，将会在 Server中发生跳转
-		    	return;		
-			
+		    	return;	
 			
 			setInfo(request, teacher,false);
 			if(!updatePersonInfo(request, response,teacher))//如果已经修改并且跳转了，

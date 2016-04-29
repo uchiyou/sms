@@ -1,7 +1,7 @@
 package domain;
 
 public class TeacherBean {
-	
+	//   write by uchiyou@sina.com
 	private String wage_number;
 	private String name;
 	private String job;

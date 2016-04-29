@@ -15,7 +15,7 @@ import domain.KnowledgeDistributeBean;
 import domain.ScoreRangeBean;
 
 public class TestManagerUtil {
-	
+	// write by uchiyou@sina.com,the fellow some function of this system was cut down
 	public static HashMap<String,Object> getAllInfo(String wageNumber,int defaultCourseId){
 		/*
 		 *   the returned HashMap has four  key for follow,

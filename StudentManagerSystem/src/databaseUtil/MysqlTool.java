@@ -16,6 +16,7 @@ import java.util.Properties;
 
 
 public class MysqlTool {
+	// write by uchiyou@sina.com , the core util
 	private static String driverClass=null;
 	private static String url=null;
 	private static String userName=null;

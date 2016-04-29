@@ -1,6 +1,7 @@
 package domain;
 
 public class StudentCourseScoreBean {
+	// write by    uchiyou@sina.com
 	private String stu_number;
 	private int ordinary_work_score;
 	private int main_work_score;

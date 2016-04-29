@@ -1,7 +1,7 @@
 package domain;
 
 public class ScoreRangeBean {
-	
+	// write by  uchiyou@sina.com
 	private int class_number;
 	private int course_record_id;
 	private int a;
