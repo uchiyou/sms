@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%-- <jsp:useBean id="myCourse" scope="request" class="domain.CourseBean" /> --%>
 
 
-<body>
+<body style="background:url(${pageContext.request.contextPath }/img2/water.jpg);">
 <center>
 <div id="head">
 <h1>考试管理</h1>

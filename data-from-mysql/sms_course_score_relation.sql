@@ -33,7 +33,7 @@ CREATE TABLE `course_score_relation` (
   KEY `score_relation_course` (`course_number`),
   CONSTRAINT `score_relation_course` FOREIGN KEY (`course_number`) REFERENCES `course` (`course_number`),
   CONSTRAINT `score_relation_student` FOREIGN KEY (`stu_number`) REFERENCES `student` (`stu_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-28  9:27:24
+-- Dump completed on 2016-04-29 16:26:49

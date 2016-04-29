@@ -28,7 +28,7 @@ CREATE TABLE `class` (
   `class_number` int(20) NOT NULL,
   `major` varchar(30) NOT NULL,
   UNIQUE KEY `class_number` (`class_number`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-28  9:27:23
+-- Dump completed on 2016-04-29 16:26:47
