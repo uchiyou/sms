@@ -29,14 +29,20 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		// check input
 		String wageNumber=request.getParameter("wageNumber");
 	       if("".equals(wageNumber)||wageNumber==null||"".equals(wageNumber.trim())){
 	    	   request.setAttribute("online", "offline");
+	    	   if(!wageNumber.matches("[0-9]{3,}"))
+	    		   request.setAttribute("loginInfo", "学号或工资号格式不正确");
+	    	   else
 	    	   request.setAttribute("loginInfo", "用户名或密码不能为空");
 				request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
 				return;
 	       }
 			
+	       
+	       // set session 
 			 HttpSession session=request.getSession();
 			 String sessionID=session.getId();
 				Cookie cookie=new Cookie("wageNumber",wageNumber);
@@ -44,10 +50,16 @@ public class LoginServlet extends HttpServlet {
 				cookie.setMaxAge(1800);					
 				response.addCookie(cookie);
 				String curUser=" 游客";
+				
+				
+				
+				// set user infomation 
 			try {
 				TeacherBean teacher;
 				StudentBean student;
 				
+				
+				// this case is a student
 				if(wageNumber.matches("[0|1|2]([0-9]{10})")){// current user is a student
 					student=StudentDao.query(wageNumber);
 					String password=request.getParameter("password");
@@ -65,7 +77,7 @@ public class LoginServlet extends HttpServlet {
 						    curUser=student.getName();
 						   
 						  
-					
+					// this case is a teacher
 				}else{
 			
 				teacher = PersonDao.query(wageNumber);
@@ -89,10 +101,11 @@ public class LoginServlet extends HttpServlet {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				request.setAttribute("errorInfo", "登陆时，出现了 SQL Exception");
 				request.getRequestDispatcher("/error.jsp").forward(request, response);
 			}//get the information from databases
 			  
-			  request.setAttribute("curUser", curUser);
+			request.setAttribute("curUser", curUser);
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 

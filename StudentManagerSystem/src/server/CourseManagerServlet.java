@@ -93,6 +93,10 @@ public class CourseManagerServlet extends HttpServlet {
 	    	return;
 		
         Integer chooseCourse= Server.getTeacherCourse(request, response, teacher);
+        if(chooseCourse==-1){
+        	request.getRequestDispatcher("/courseManager.jsp").forward(request, response);
+        	return;
+        }
 
         showCourseRecord(request, response, chooseCourse);
         

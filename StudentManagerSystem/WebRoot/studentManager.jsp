@@ -46,12 +46,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <br/>
 <div id="operation">
 <div id="query">
+<font size="+2" color="#0000CC">${noneCourseInfo }</font><br/>
 <font size="+2" color="#CCCC00">学生信息查询</font><br/>
 <form action="${pageContext.request.contextPath }/servlet/StudentManageServlet" method="post">
 请输入学生学号：<input type="text" id="stduentNumber" name="studentNumber1"></input>
 <input type="hidden" name="smpart" value='1' />
 <input type="submit" id="submit" value="确定" />
+<font color="#CCCCCC">学生学号如13130110075</font>
 <br/><font color="0x005500">${studentNumber1Info }</font><br/>
+
+
+
+
 
 <div id="stuInfo"  style="display:${displayStuInfo}">
 <table id="showStudent">
@@ -136,7 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </div>
 <br/>
-<a href="${pageContext.request.contextPath}/index.jsp">
+<a href="${pageContext.request.contextPath }/index.jsp">
 <font color="007777" size='4'>
 回到主界面
 </font>

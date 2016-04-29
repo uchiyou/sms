@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <h1>考试管理</h1>
 
 </div>
-
+<font size="+2" color="#0000CC">${noneCourseInfo }</font><br/>
 
  <jsp:useBean id="course" scope="request" class="domain.CourseBean" />
 
@@ -229,7 +229,7 @@ xxx</span>
 </table>
 
 
-<a href="${pageContext.request.contextPath}/index.jsp">
+<a href="${pageContext.request.contextPath }/index.jsp">
 <font color="007777" size='4'>
 回到主界面
 </font>

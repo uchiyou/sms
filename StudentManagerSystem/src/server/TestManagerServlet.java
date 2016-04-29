@@ -73,9 +73,13 @@ public class TestManagerServlet extends HttpServlet {
 			        Integer chooseCourse= Server.getTeacherCourse(request, response, teacher);
 			        
 			        // ----------->prepare  the necessary data for dealXXXTable method
+			        if(chooseCourse==-1){
+						request.getRequestDispatcher("/testManager.jsp").forward(request, response);
+						return;
+			        }
 					CourseBean course=CourseQueryDao.query(chooseCourse);
 					request.setAttribute("defaultCourse", course);
-
+			        
 					
 					ArrayList<ScoreRangeBean> scoreList=TestManagerUtil.queryScoreRangeBean(teacher.getWage_number(),course.getCourse_number());
 			        

@@ -34,47 +34,33 @@ public class SignUpServlet extends HttpServlet{
 			return;
 		}else{
 		try{
-		TeacherBean teacher;
-		StudentBean student;
 
 		String wageNumber=req.getParameter("wageNumber");
-		
-		if("".equals(req.getParameter("userName"))||"".equals(req.getParameter("userName").trim())
-				||"".equals(wageNumber)||"".equals(wageNumber.trim())
-				||"".equals(req.getParameter("job"))||"".equals(req.getParameter("job").trim())
-				||"".equals(req.getParameter("password"))||"".equals(req.getParameter("password").trim())
-				){
-			req.setAttribute("signUp", "请填写完整的信息");
+		Object bean=Server.checkInput(req, resp);
+		//如果用于有非法输入
+		if(bean==null){
+			req.setAttribute("signUp", "请填写正确的信息");
 			req.getRequestDispatcher("/jsp/signUp.jsp").forward(req, resp);
 			return;
 		}
 		
-		
+		// 检查数据库里是否已经有该注册信息
 		if(PersonDao.query(wageNumber)!=null||StudentDao.query(wageNumber)!=null){
 			req.setAttribute("signUp", "用户已经存在");
 			req.getRequestDispatcher("/jsp/signUp.jsp").forward(req, resp);
 			return;
 		}
+		
+		//  如果是学生或者老师
 		if(wageNumber.matches("[0|1|2]([0-9]{10})")){
-			student=new StudentBean();
-			student.setStu_number(wageNumber);
-			student.setName(req.getParameter("userName"));
-			student.setClass_number(Integer.parseInt(req.getParameter("classNumber")));
-			student.setSex(req.getParameter("gender"));
-			student.setStu_type(req.getParameter("studentType"));
-			student.setPassword(req.getParameter("password"));
-			
+			StudentBean student=(StudentBean) bean;
 			StudentDao.insert(student);
 		}else{				
-		teacher=new TeacherBean();
-		teacher.setWage_number(wageNumber);
-		teacher.setPassword(req.getParameter("password"));
-		teacher.setName(req.getParameter("userName"));
-		teacher.setJob(req.getParameter("job"));
-		
+		TeacherBean teacher=(TeacherBean) bean;
 		PersonDao.insert(teacher);
 		}
 		
+		// 
 		req.setAttribute("loginInfo", "注册成功，请登陆");
 		req.getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
 		

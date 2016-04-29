@@ -49,7 +49,7 @@ function check(node,pattern,behind,tip){
 	
 }
 </script>
-<center>
+<center><!-- ${pageContext.request.contextPath } -->
        <div id="login">
       <font color="0x008800">${loginInfo}</font><br/>
         
@@ -69,15 +69,15 @@ function check(node,pattern,behind,tip){
         <input type="submit" value="注册"/>
         </form>
     </div>
-  </div>
+ 
   
   
-<a href="${pageContext.request.contextPath}/index.jsp">
+<a href="${pageContext.request.contextPath }/index.jsp">
 <font color="007777" size='4'>
 回到主界面
 </font>
-</a>
-  
+</a><br/><br/>
+   </div>
 </center>
 </body>
 </html>
