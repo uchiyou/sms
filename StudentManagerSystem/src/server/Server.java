@@ -18,6 +18,10 @@ import domain.CourseBean;
 import domain.StudentBean;
 import domain.TeacherBean;
 
+
+/*
+ *      如果日后运行出现错， 则 Ctrl + F 键，输入 System.out.print ,找到所有备注释的输出语句
+ */
 public class Server {// write by uchiyou
 	//-------------------------mainly util for inner server method ,
 		public static void setCourseListOrder(LinkedList<CourseBean> courseList,Integer chooseCourse){
@@ -49,7 +53,7 @@ public class Server {// write by uchiyou
 			
 			
 			if(userName==null||wageNumber==null||job==null||password==null){
-				System.out.println("get input info found null, in server checkInput method");
+			//	System.out.println("get input info found null, in server checkInput method");
 				return null;
 			}
 			
@@ -64,7 +68,7 @@ public class Server {// write by uchiyou
 					||wageNumber.matches("[0-9]{2,40}")
 					||password.matches("([a-z]|[0-9]){2-40}")*/
 					){
-				System.out.println("the input have error infomation, in server checkInput method");
+				//System.out.println("the input have error infomation, in server checkInput method");
 				return null;
 			}else{
 				if(wageNumber.matches("[0|1|2]([0-9]{10})")){
@@ -100,9 +104,9 @@ public class Server {// write by uchiyou
 		
 		HttpSession session=request.getSession();
 		String online= (String) session.getAttribute("online");
-		System.out.println("----------->"+online);
+	//	System.out.println("----------->"+online);
 		if(!"online".equals(online)){
-			System.out.println("in server.checkLogin----> online is not online");
+		//	System.out.println("in server.checkLogin----> online is not online");
 			request.setAttribute("online", "offline");
 			request.setAttribute("loginInfo", "你已下线，请从新登陆");
 			request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
@@ -185,7 +189,7 @@ public class Server {// write by uchiyou
 				}
 			}
 			}else{//如果没有Cookie，说明是第一次登陆
-				System.out.println("server.getTeacher()---->cookie is null");
+			//	System.out.println("server.getTeacher()---->cookie is null");
 				request.setAttribute("loginInfo", "请先登录");
 				request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
 				return null;

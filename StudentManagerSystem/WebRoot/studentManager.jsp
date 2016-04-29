@@ -47,9 +47,9 @@ background-image:url('./img/cat1.jpg');
 <%@ page language="java" import="domain.*" %>
 <%@ page language="java" import="java.util.ArrayList" %>
 
-<body id="bodyId">
+<body id="bodyId" style="background:url(${pageContext.request.contextPath }/img/cat1.jpg);">
 <center>
-<div id="head1" style="background:url(img/cat1.jpg);">
+<div id="head1">
 <h1 id="head1">学生管理</h1>
 </div>
 <br/>
@@ -61,8 +61,8 @@ background-image:url('./img/cat1.jpg');
 请输入学生学号：<input type="text" id="stduentNumber" name="studentNumber1"></input>
 <input type="hidden" name="smpart" value='1' />
 <input type="submit" id="submit" value="确定" />
-<font color="#CCCCCC">学生学号如13130110075</font>
-<br/><font color="0x005500">${studentNumber1Info }</font><br/>
+<font color="#666677">学生学号如13130110075</font>
+<br/><font color="0x999999">${studentNumber1Info }</font><br/>
 
 
 
@@ -115,7 +115,7 @@ background-image:url('./img/cat1.jpg');
 
 
 
-<font color="#CCCCCC">如果不输入班级号如：13011，表示查询已选课程所有学生成绩</font>
+<font color="#666677">如果不输入班级号如：13011，表示查询已选课程所有学生成绩</font>
 <br/><br/>
 <table id="studentInfo" width="800" border="1">
   <caption>

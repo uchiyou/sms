@@ -2,6 +2,8 @@
     <wb-module deploy-name="StudentManagerSystem">
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/WebRoot/img"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/WebRoot/img2"/>
         <property name="context-root" value="StudentManagerSystem"/>
         <property name="java-output-path" value="/StudentManagerSystem/WebRoot/WEB-INF/classes"/>
     </wb-module>

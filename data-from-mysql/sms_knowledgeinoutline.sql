@@ -31,7 +31,7 @@ CREATE TABLE `knowledgeinoutline` (
   KEY `chapterWithOutline` (`chapter_id`),
   CONSTRAINT `chapterWithOutline` FOREIGN KEY (`chapter_id`) REFERENCES `outline_chapter` (`chapter_id`),
   CONSTRAINT `konwledgeDistribute` FOREIGN KEY (`detail_question_id`) REFERENCES `detail_question` (`detail_question_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-28  9:27:25
+-- Dump completed on 2016-04-29 16:26:51

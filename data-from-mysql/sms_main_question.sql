@@ -31,7 +31,7 @@ CREATE TABLE `main_question` (
   PRIMARY KEY (`main_question_id`),
   KEY `main_question_coure` (`course_number`),
   CONSTRAINT `main_question_coure` FOREIGN KEY (`course_number`) REFERENCES `course` (`course_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-28  9:27:26
+-- Dump completed on 2016-04-29 16:26:51

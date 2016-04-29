@@ -184,51 +184,55 @@ function login(){
  <%-- 
      上面这两段是导入自定义java类，并声明所要使用的类
  --%>
-<body>
+<body style="background:url(${pageContext.request.contextPath }/img2/data.gif);">
 <div id="head">
 <h1 id="h1">
 <font size="8" color="#0000FF">成绩管理系统</font></h1>
 
        <div id="rightUp">
                <!--  <span id="land"> -->
-                       
+                       <font color="0x999999">
                       <a id="signIn" href="javascript:void(0)" onclick="loginSure(true)"><font size="3"> 登陆</font></a>
-                                                                              &nbsp|&nbsp
+                                                                              &nbsp;|&nbsp;
                     
                         <a href="${pageContext.request.contextPath }/jsp/signUp.jsp">
-               <font size="3">
+                        
+               <font size="3" color="0x999999">
               注册
                </font>
                </a>
-                       &nbsp&nbsp&nbsp&nbsp
+               
+</font>
+                       &nbsp;&nbsp;
               <!--    </span> -->
                  
                  
                  
                  <span id="suggest">
-                        <font size="3"> 你好 ：
+                        <font size="3" color="0x999999"> 你好 ：
                       ${curUser}
-                         &nbsp&nbsp&nbsp&nbsp</font>
+                         &nbsp;&nbsp;&nbsp&nbsp</font>
                  </span>
                  
                  <span id="ourInfo">
-                         <font size="3"> 
+                         <font size="3" color="0x999999"> 
                          <a id="exitUser" href="${pageContext.request.contextPath }/servlet/Exit"> 退出</a>
-                          &nbsp&nbsp&nbsp&nbsp</font>
+                          &nbsp;&nbsp;&nbsp&nbsp</font>
                   </span> 
                   <br/>
                     <div id="register">
                     <form action="${pageContext.request.contextPath }/servlet/LoginServlet" method="post">
-    	学号：<input type="text" name="wageNumber"><br/>
+                    <font color="0x999999">
+    	学号：<input type="text" name="wageNumber"/><br/>
     	密码  ：<input type="password" name="password" /><br/>
-    	<input type="submit" value="登陆">
+    	</font>
+    	<input type="submit" value="登陆"/>
     </form>
                     <br/>
                 
                  </div>
                    
        </div>
-
 
 </div>
 
@@ -297,12 +301,14 @@ function login(){
 
 
 <div id="tail">
+
            <div id="end">
-           <span id="joinus">
-          作者 ： &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <font color="0x999999">
+                     <span id="joinus">
+                                                                                                            作者 ： &nbsp;&nbsp;&nbsp;&nbsp;</span>
            
-           <span id="copyRight">&copy;周游&nbsp|&nbsp13130110075 </span>
-           
+                     <span id="copyRight">&copy;周游&nbsp;|&nbsp;13130110075 </span>
+                </font>
            </div>
 
 

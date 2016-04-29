@@ -35,7 +35,7 @@ CREATE TABLE `detail_question` (
   UNIQUE KEY `detail_question_id` (`detail_question_id`),
   KEY `detail_question_main` (`main_question_id`),
   CONSTRAINT `detail_question_main` FOREIGN KEY (`main_question_id`) REFERENCES `main_question` (`main_question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-28  9:27:23
+-- Dump completed on 2016-04-29 16:26:47

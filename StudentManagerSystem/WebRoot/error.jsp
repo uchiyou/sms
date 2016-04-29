@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>error page</title>
 </head>
-<body>
+<body style="background:url(${pageContext.request.contextPath }/img/cat2.jpg);">
 <center>
 不好意思,好像粗错鸟~~
 <br/>

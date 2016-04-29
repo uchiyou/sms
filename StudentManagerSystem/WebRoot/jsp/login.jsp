@@ -35,7 +35,7 @@ body{
 }
 </style>
 
-<body>
+<body style="background:url(${pageContext.request.contextPath }/img/cat2.jpg);">
 <script type="text/javascript">
 function check(node,pattern,behind,tip){
 	var text=node.innerText;
@@ -51,15 +51,17 @@ function check(node,pattern,behind,tip){
 </script>
 <center><!-- ${pageContext.request.contextPath } -->
        <div id="login">
-      <font color="0x008800">${loginInfo}</font><br/>
-        
+      <font color="0xffffff">${loginInfo}</font><br/>
+      
         <form action="${pageContext.request.contextPath }/servlet/LoginServlet" method="post">
-    	用户名：<input type="text" name="wageNumber" onmousemove="check(this,'\d{3-11}','userNumberTip','输入错误,3-11位数字')" />
+    	 <font color="0x999999">
+    	用户名：<input type="text"  name="wageNumber" onmousemove="check(this,'\d{3-11}','userNumberTip','输入错误,3-11位数字')" />
     	<font color="0x00ff00"><span id="userNumberTip"></span></font>
     	<br/>
     	 密码：    <input type="password" name="password" onmousemove="check(this,'\w{3-20}','pwdTip','输入格式错误,3-20位字母或数字')" />
     	<font color="0x00ff00"> <span id="pwdTip"></span></font>
     	 <br/>
+    	 </font> 
     	<input type="submit" value="登陆"/>
     </form>
     

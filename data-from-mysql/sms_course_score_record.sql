@@ -31,7 +31,7 @@ CREATE TABLE `course_score_record` (
   `attendance_score` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`course_score_id`),
   CONSTRAINT `course_score_record_score_detail` FOREIGN KEY (`course_score_id`) REFERENCES `course_score_relation` (`course_score_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-28  9:27:23
+-- Dump completed on 2016-04-29 16:26:48

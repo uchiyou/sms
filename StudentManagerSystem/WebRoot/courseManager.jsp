@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  
 
 
-<body>
+<body style="background:url(${pageContext.request.contextPath }/img2/water2.jpg);">
 
 
 <center>

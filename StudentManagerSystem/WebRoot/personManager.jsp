@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <%@ page language="java" import="domain.*" %>
-<body>
+<body style="background:url(${pageContext.request.contextPath }/img/flower.jpg);">
 <center>
 <div id="head">
 <h1>个人管理</h1>

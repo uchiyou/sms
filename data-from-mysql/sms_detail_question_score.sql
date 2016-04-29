@@ -32,7 +32,7 @@ CREATE TABLE `detail_question_score` (
   KEY `question_average_score_score_relation` (`course_score_id`),
   CONSTRAINT `question_average_score_detail_question` FOREIGN KEY (`detail_question_id`) REFERENCES `detail_question` (`detail_question_id`),
   CONSTRAINT `question_average_score_score_relation` FOREIGN KEY (`course_score_id`) REFERENCES `course_score_relation` (`course_score_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-28  9:27:24
+-- Dump completed on 2016-04-29 16:26:50

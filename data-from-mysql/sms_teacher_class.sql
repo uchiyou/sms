@@ -31,7 +31,7 @@ CREATE TABLE `teacher_class` (
   KEY `teacher_class_class` (`class_number`),
   CONSTRAINT `teacher_class_class` FOREIGN KEY (`class_number`) REFERENCES `class` (`class_number`),
   CONSTRAINT `teacher_class_teacher` FOREIGN KEY (`wage_number`) REFERENCES `teacher` (`wage_number`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-28  9:27:26
+-- Dump completed on 2016-04-29 16:26:51
