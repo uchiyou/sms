@@ -21,6 +21,8 @@ import domain.StudentCourseScoreBean;
 import domain.TeacherBean;
 
 public class StudentManageServlet extends HttpServlet {
+	
+	
 
 	private void dealTopPart(HttpServletRequest request, HttpServletResponse response,String smpart)
 			throws ServletException, IOException, SQLException {
@@ -41,6 +43,9 @@ public class StudentManageServlet extends HttpServlet {
 						}
 					}}    		
 	}
+	
+	
+	
 	
 	private void dealBottomPart(HttpServletRequest request, HttpServletResponse response,String smpart)
 			throws ServletException, IOException, SQLException {
@@ -71,7 +76,13 @@ public class StudentManageServlet extends HttpServlet {
 	    if(teacher==null)// 账号异常情况，将会在 Server中发生跳转
 	    	return;
 		
-		courseList.addAll(CourseQueryDao.queryTeacherCourses(teacher.getWage_number()));		
+	    ArrayList<CourseBean>  list=  CourseQueryDao.queryTeacherCourses(teacher.getWage_number());
+	    if(list!=null)
+		courseList.addAll(list);
+	    else{
+	    	request.setAttribute("noneCourseInfo", "您没有教任何课程");
+	    	return;
+	    }
 		CourseBean course=chooseCourse==-1?courseList.get(0):CourseQueryDao.query(chooseCourse);
 		
 		Server.setCourseListOrder(courseList, chooseCourse);
@@ -100,6 +111,8 @@ public class StudentManageServlet extends HttpServlet {
 	
 	
 	
+	
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if(!Server.checkLogin(request, response)) 
@@ -113,12 +126,21 @@ public class StudentManageServlet extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			request.setAttribute("errorInfo", "StudentManagerServlet-->账号异常错误");
+			request.setAttribute("errorInfo", "StudentManagerServlet-->账号异常错误(SQLException");
 			request.getRequestDispatcher("/error.jsp").forward(request, response);
-		}
+		} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		request.setAttribute("errorInfo", "StudentManagerServlet-->账号异常错误(Exception");
+		request.getRequestDispatcher("/error.jsp").forward(request, response);
+	}
+	
 		
 	}
 
+	
+	
+	
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

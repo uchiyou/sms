@@ -13,7 +13,7 @@
 ${errorInfo}
 <br/>
 
-<a href="${pageContext.request.contextPath}/index.jsp">
+<a href="${pageContext.request.contextPath }/index.jsp">
 <font color="007777" size='4'>
 回到主界面
 </font>

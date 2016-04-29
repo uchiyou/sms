@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 课程管理
 </h1>
 </div>
-
+<font size="+2" color="#0000CC">${noneCourseInfo }</font><br/>
 <div id="mycourseDiv">
 
 <table id="courseInfo" width="600" border="1">
@@ -146,7 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </div>
 
-<a href="${pageContext.request.contextPath}/index.jsp">
+<a href="${pageContext.request.contextPath }/index.jsp">
 <font color="007777" size='4'>
 回到主界面
 </font>

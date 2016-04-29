@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import dao.CourseQueryDao;
 import dao.PersonDao;
 import domain.CourseBean;
+import domain.StudentBean;
 import domain.TeacherBean;
 
 public class Server {
@@ -29,11 +30,63 @@ public class Server {
 			}
 			
 		}
+		
 	
 		
 		
 		
 	//-----------------------server method for server
+		
+		public static Object checkInput(HttpServletRequest req, HttpServletResponse resp)
+				throws Exception{
+		
+			String userName=req.getParameter("userName");
+			String wageNumber=req.getParameter("wageNumber");
+			String job=req.getParameter("job");
+			String password=req.getParameter("password");
+			
+			
+			if(userName==null||wageNumber==null||job==null||password==null){
+				System.out.println("get input info found null, in server checkInput method");
+				return null;
+			}
+			
+			
+			
+			
+			
+			if("".equals(userName)||"".equals(userName.trim())
+					||"".equals(job)||"".equals(job.trim())
+					||"".equals(wageNumber)||"".equals(wageNumber.trim())
+					||"".equals(password)||"".equals(password.trim())/*
+					||wageNumber.matches("[0-9]{2,40}")
+					||password.matches("([a-z]|[0-9]){2-40}")*/
+					){
+				System.out.println("the input have error infomation, in server checkInput method");
+				return null;
+			}else{
+				if(wageNumber.matches("[0|1|2]([0-9]{10})")){
+					StudentBean student=new StudentBean();
+					
+					student.setStu_number(wageNumber);
+					student.setName(userName);
+					student.setClass_number(Integer.parseInt(req.getParameter("classNumber")));
+					student.setSex(req.getParameter("gender"));
+					student.setStu_type(req.getParameter("studentType"));
+					student.setPassword(password);
+					return student;
+				}else{
+					TeacherBean teacher=new TeacherBean();
+					teacher.setWage_number(wageNumber);
+					teacher.setName(userName);
+					teacher.setJob(job);
+					teacher.setPassword(password);
+					return teacher;
+				}
+				
+			}
+		
+		}
 	public static boolean checkLogin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
 		HttpSession session=request.getSession();
@@ -64,8 +117,14 @@ public class Server {
 		
 		LinkedList<CourseBean> courseList=new LinkedList<CourseBean>();// so courseList can't be null
 		
-			courseList.addAll(((List<CourseBean>)(CourseQueryDao.queryTeacherCourses(teacher.getWage_number()))));
-			
+/*			courseList.addAll(((List<CourseBean>)(CourseQueryDao.queryTeacherCourses(teacher.getWage_number()))));*/
+		  ArrayList<CourseBean>  list=  CourseQueryDao.queryTeacherCourses(teacher.getWage_number());
+		    if(list!=null)
+			courseList.addAll(list);
+		    else{
+		    	request.setAttribute("noneCourseInfo", "您没有教任何课程");
+		    	return -1;
+		    }
 			
 			request.setAttribute("curUser", teacher.getName()+" "+teacher.getJob());
 			
@@ -87,10 +146,15 @@ public class Server {
 		
 		HttpSession session=request.getSession();
 		TeacherBean teacher=(TeacherBean) session.getAttribute("teacher");
+		
+		
+		
 		if(teacher==null){
-			Cookie[] cookies=request.getCookies();
 			
+			// 如果 session 里没有，尝试从 Cookie 中取
+			Cookie[] cookies=request.getCookies();
 			String wageNumber=null;
+			if(cookies!=null){
 			for(int i=0;i<cookies.length;++i){
 				if(cookies[i].getName().equals("wageNumber")){
 					wageNumber=cookies[i].getValue();
@@ -98,7 +162,14 @@ public class Server {
 					break;
 				}
 			}
+			}else{
+				request.setAttribute("loginInfo", "请先登录");
+				request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+				return null;
+			}
 			
+			
+			// 如果从 Cookie 中获取成功，则将 信息保存到 session
 			if(wageNumber!=null){
 					teacher= PersonDao.query(wageNumber);
 					if(teacher==null){
@@ -108,10 +179,14 @@ public class Server {
 					}else{
 						session.setAttribute("teacher", teacher);
 					}
+			}else{//Cookie 中都没有，说明用户是第一次访问
+				request.setAttribute("loginInfo", "请先登陆");
+				request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+				return null;
 			}
-		}else{
-			// should do something here ....
+			
 		}
+		
 		
 		return teacher;		
 	}

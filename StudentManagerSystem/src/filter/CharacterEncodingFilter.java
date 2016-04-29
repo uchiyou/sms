@@ -25,20 +25,24 @@ public class CharacterEncodingFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		try {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		TeacherBean teacher=Server.getTeacher((HttpServletRequest)request, (HttpServletResponse)response);
+		TeacherBean teacher;
+		try {
+			teacher = Server.getTeacher((HttpServletRequest)request, (HttpServletResponse)response);
+		
 		
 		if(teacher!=null)
 	    request.setAttribute("curUser", teacher.getName()+" "+teacher.getJob());
-		
 		chain.doFilter(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
 		}
+
+		
 
 	}
 
