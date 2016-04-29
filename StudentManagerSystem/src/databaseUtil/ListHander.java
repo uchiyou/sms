@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import databaseUtil.MysqlTool.ResultSetHander;
-
+//---write  by uchiyou@sina.com
 /*
  * 用于实现表的多条记录返回
  */

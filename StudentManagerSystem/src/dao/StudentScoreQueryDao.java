@@ -12,6 +12,7 @@ import databaseUtil.MysqlTool;
 import domain.StudentCourseScoreBean;
 
 public class StudentScoreQueryDao {
+	// write by uchiyou@ sina.com,
 	/*@Test
 	public void test() throws SQLException{
 		query(1000,13011);

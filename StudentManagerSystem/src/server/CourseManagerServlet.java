@@ -1,4 +1,4 @@
-package server;
+package server;// write by uchiyou
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,10 +19,7 @@ import domain.TeacherBean;
 
 public class CourseManagerServlet extends HttpServlet {
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		     doPost(request, response);
-		}
+	
 	
 
 	private void showCourseRecord(HttpServletRequest request, HttpServletResponse response,Integer chooseCourse)
@@ -88,6 +85,7 @@ public class CourseManagerServlet extends HttpServlet {
 		try {
 		if(!Server.checkLogin(request, response)) 
 			return;
+		
 		TeacherBean teacher=Server.getTeacher(request, response);
 		if(teacher==null)// 账号异常情况，将会在 Server中发生跳转
 	    	return;
@@ -109,5 +107,10 @@ public class CourseManagerServlet extends HttpServlet {
 		}//get the information from databases
 		
 	}
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		     doPost(request, response);
+		}
+	// write by uchiyou
 
 }

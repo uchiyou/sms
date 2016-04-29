@@ -13,7 +13,7 @@ import domain.TeacherCourseBean;
 
 
 public class CourseRecordDao {
-
+	// write by uchiyou@ sina.com
 	public static ArrayList<CourseRecordBean> query(int course_number) throws SQLException{
 		String sql="select * from course_record where course_number=?";	    
 				Object parameters[]={course_number};		

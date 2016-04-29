@@ -17,7 +17,13 @@ import domain.StudentBean;
 import domain.TeacherBean;
 
 public class LoginServlet extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5133019558550915900L;
 
+
+	// write by uchiyou
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -25,35 +31,55 @@ public class LoginServlet extends HttpServlet {
 		
 	}
 
-	
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		// check input
 		String wageNumber=request.getParameter("wageNumber");
 	       if("".equals(wageNumber)||wageNumber==null||"".equals(wageNumber.trim())){
-	    	   request.setAttribute("online", "offline");
-	    	   if(!wageNumber.matches("[0-9]{3,}"))
-	    		   request.setAttribute("loginInfo", "学号或工资号格式不正确");
-	    	   else
 	    	   request.setAttribute("loginInfo", "用户名或密码不能为空");
 				request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+				return;
+	       }else if(!wageNumber.matches("[0-9]{3,}")){
+    		   request.setAttribute("loginInfo", "学号或工资号格式不正确");
+    		   request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
 				return;
 	       }
 			
 	       
 	       // set session 
 			 HttpSession session=request.getSession();
-			 String sessionID=session.getId();
+			 /*session.setAttribute("teacher", teacher);
+			 session.setAttribute("online", "online");// mark the current user is online
+			 */
+			 session.removeAttribute("curUser");
+			 session.removeAttribute("online");
+			 session.removeAttribute("teacher");			
+			 session.removeAttribute("student");
+			 
+			 session.setMaxInactiveInterval(1800);
+			// String sessionID=session.getId();
+			 Cookie[] cookies=request.getCookies();
+			 if(cookies==null){// 如果没有 Cookie ，则创建一个 Cookie,
 				Cookie cookie=new Cookie("wageNumber",wageNumber);
-				cookie.setPath("/StudentManagerSystem");
-				cookie.setMaxAge(1800);					
+				cookie.setPath(request.getContextPath());
+				cookie.setMaxAge(3600*24);					
 				response.addCookie(cookie);
-				String curUser=" 游客";
+			 }else{// 如果有，则修改Cookie的值
+				 for(Cookie cook:cookies){
+					 if(cook.getName().equals("wageNumber")){
+						 cook.setValue(wageNumber);
+						 break;
+					 }
+				 }
+			 }
 				
 				
 				
 				// set user infomation 
+				String curUser=" 游客";
+				
 			try {
 				TeacherBean teacher;
 				StudentBean student;
@@ -72,8 +98,7 @@ public class LoginServlet extends HttpServlet {
 					}
 						request.setAttribute("student", student);//give the date to jsp
 						// keep a session keep teacher wageNumber
-						    session.setAttribute("student", student);
-						    session.setAttribute("online", "online");// mark the current user is online
+						    session.setAttribute("student", student);						   
 						    curUser=student.getName();
 						   
 						  
@@ -91,10 +116,9 @@ public class LoginServlet extends HttpServlet {
 					return;
 				}else{
 					
-					request.setAttribute("teacher", teacher);//give the date to jsp
+					   request.setAttribute("teacher", teacher);//give the date to jsp
 					// keep a session keep teacher wageNumber
-					    session.setAttribute("teacher", teacher);
-					    session.setAttribute("online", "online");// mark the current user is online
+					    session.setAttribute("teacher", teacher);					   
 					    curUser= teacher.getName()+" "+teacher.getJob();
 				}
 				}
@@ -105,7 +129,9 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher("/error.jsp").forward(request, response);
 			}//get the information from databases
 			  
-			request.setAttribute("curUser", curUser);
+			session.setAttribute("online", "online");// mark the current user is online
+			session.setAttribute("curUser", curUser);
+			request.removeAttribute("curUser");
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 

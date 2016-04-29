@@ -10,7 +10,7 @@ import databaseUtil.MysqlTool;
 import domain.StudentBean;
 
 public class StudentDao {
-	
+	// write by uchiyou@sina. com
 
 	
 	public static void insert(StudentBean student) throws Exception{

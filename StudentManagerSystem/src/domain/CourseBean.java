@@ -1,7 +1,7 @@
 package domain;
 
 public class CourseBean {
-	
+	// write by uchiyou
 	private int course_number;
 	private String course_name;
 	private String course_student;

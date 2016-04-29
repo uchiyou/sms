@@ -7,6 +7,7 @@ import java.sql.ResultSetMetaData;
 import databaseUtil.MysqlTool.ResultSetHander;
 
 public class BeanHander implements ResultSetHander{
+	//-- write by uchiyou@sina.com
 	private Class bean=null;
 	
 	public BeanHander(Class bean){

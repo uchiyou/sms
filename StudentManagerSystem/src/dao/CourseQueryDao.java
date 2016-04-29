@@ -9,7 +9,7 @@ import databaseUtil.MysqlTool;
 import domain.CourseBean;
 
 public class CourseQueryDao {
-	
+	//  write by uchiyou@sina.com
 	
 	public static ArrayList<CourseBean> queryTeacherCourses(String wageNumber) throws SQLException{
 		String sql="select * from course where course_number in ( select course_number from course_teacher where wage_number=?)";

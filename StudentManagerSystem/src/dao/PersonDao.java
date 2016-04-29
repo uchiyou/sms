@@ -10,7 +10,7 @@ import databaseUtil.MysqlTool;
 import domain.TeacherBean;
 
 public class PersonDao {
-	
+	// write by uchiyou @sina.com
 /*	@Test
 	public void test() throws SQLException{
 		TeacherBean teacher=query("123");

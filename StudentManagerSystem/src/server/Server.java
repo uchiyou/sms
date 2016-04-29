@@ -18,7 +18,7 @@ import domain.CourseBean;
 import domain.StudentBean;
 import domain.TeacherBean;
 
-public class Server {
+public class Server {// write by uchiyou
 	//-------------------------mainly util for inner server method ,
 		public static void setCourseListOrder(LinkedList<CourseBean> courseList,Integer chooseCourse){
 			int i=courseList.size();
@@ -37,6 +37,8 @@ public class Server {
 		
 	//-----------------------server method for server
 		
+		
+		// check whether the input is legel
 		public static Object checkInput(HttpServletRequest req, HttpServletResponse resp)
 				throws Exception{
 		
@@ -87,11 +89,20 @@ public class Server {
 			}
 		
 		}
+		
+		
+		
+		
+		// check if the current request is online
 	public static boolean checkLogin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
+		
+		
 		HttpSession session=request.getSession();
 		String online= (String) session.getAttribute("online");
+		System.out.println("----------->"+online);
 		if(!"online".equals(online)){
+			System.out.println("in server.checkLogin----> online is not online");
 			request.setAttribute("online", "offline");
 			request.setAttribute("loginInfo", "你已下线，请从新登陆");
 			request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
@@ -100,6 +111,11 @@ public class Server {
 		return true;
 	}
 	
+	
+	
+	
+	
+	// query teacher's course
 	public static Integer getTeacherCourse(HttpServletRequest request, HttpServletResponse response,TeacherBean teacher)
 			throws ServletException, IOException, SQLException{
 		/*
@@ -141,6 +157,10 @@ public class Server {
 	}
 	
 	
+	
+	
+	
+	// if return null, which mean had forward in getTeacher,
 	public static TeacherBean getTeacher(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException{
 		
@@ -158,32 +178,20 @@ public class Server {
 			for(int i=0;i<cookies.length;++i){
 				if(cookies[i].getName().equals("wageNumber")){
 					wageNumber=cookies[i].getValue();
-					//session.setAttribute("teacher", teacher);
+					teacher=PersonDao.query(wageNumber);
+					if(teacher!=null)
+					session.setAttribute("teacher", teacher);
 					break;
 				}
 			}
-			}else{
+			}else{//如果没有Cookie，说明是第一次登陆
+				System.out.println("server.getTeacher()---->cookie is null");
 				request.setAttribute("loginInfo", "请先登录");
 				request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
 				return null;
 			}
 			
-			
-			// 如果从 Cookie 中获取成功，则将 信息保存到 session
-			if(wageNumber!=null){
-					teacher= PersonDao.query(wageNumber);
-					if(teacher==null){
-						request.setAttribute("loginInfo", "账号异常，请从新登陆");
-						request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
-						return null;
-					}else{
-						session.setAttribute("teacher", teacher);
-					}
-			}else{//Cookie 中都没有，说明用户是第一次访问
-				request.setAttribute("loginInfo", "请先登陆");
-				request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
-				return null;
-			}
+		
 			
 		}
 		

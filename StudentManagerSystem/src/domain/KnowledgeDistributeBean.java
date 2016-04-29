@@ -3,7 +3,7 @@ package domain;
 import java.util.List;
 
 public class KnowledgeDistributeBean {
-	
+	// write by  uchiyou@sina.com
 	private int main_question_id;
 	private int detail_question_number;
 	private List<Integer> partInOutline;

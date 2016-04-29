@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import server.Server;
 import domain.TeacherBean;
-
+//write by uchiyou
 //the class is for deal with character encoding program
 public class CharacterEncodingFilter implements Filter {
 

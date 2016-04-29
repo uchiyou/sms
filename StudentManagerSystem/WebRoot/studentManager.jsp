@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page isELIgnored="false" %> 
+<!--  write by uchiyou@sina.com, -->
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -34,13 +35,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>studentManager</title>
+
+<!-- style type="text/css">
+bodyId
+{
+background-image:url('./img/cat1.jpg');
+}
+
+</style> -->
 </head>
 <%@ page language="java" import="domain.*" %>
 <%@ page language="java" import="java.util.ArrayList" %>
 
-<body>
+<body id="bodyId">
 <center>
-<div id="head1">
+<div id="head1" style="background:url(img/cat1.jpg);">
 <h1 id="head1">学生管理</h1>
 </div>
 <br/>

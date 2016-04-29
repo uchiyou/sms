@@ -3,6 +3,7 @@ package domain;
 import java.math.BigDecimal;
 
 public class DetailQuestionScoreBean {
+	// write by uchiyou@sina.com
 	private int detail_question_id;
 	private BigDecimal score;
 	public DetailQuestionScoreBean(int detail_question_id, BigDecimal score) {

@@ -1,6 +1,8 @@
 package domain;
 
 public class TeacherCourseBean {
+	
+	// write by- uchiyou@sina.com
 	private int course_number;
 	private String wage_number;
 	public int getCourse_number() {

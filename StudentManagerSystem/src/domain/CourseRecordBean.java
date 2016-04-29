@@ -1,7 +1,7 @@
 package domain;
 
 public class CourseRecordBean {
-	
+	// write by uchiyou
 	private int course_record_id;
 	private int sequence;
 	private String course_content;
