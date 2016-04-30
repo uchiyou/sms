@@ -35,6 +35,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>testManager</title>
+<style type="text/css">
+
+body{
+	margin:0;
+	padding:0;
+	font-size:14px;
+	font-family:"微软雅黑","宋体";
+}
+.scoreRangeTableClass{
+    color: white;
+}
+.distributeListClass{
+    color: yellow;
+}
+
+</style>
 </head>
 <%@ page language="java" import="domain.*" %>
 <%@ page language="java" import="java.util.ArrayList" %>
@@ -98,7 +114,7 @@ xxx</span>
 
 <div id="knowledgeDistribute">
   <br/>
-<table id="knowledgeDistribute"width="800" border="1" summary="this is a test
+<table id="knowledgeDistribute"width="800" border="1" class="distributeListClass" summary="this is a test
 ">
   <caption>
     <span id="courseId" class="course">${curCourseName }</span>课试卷知识点覆盖表 <!--  <input type="button" id="modifyKnowledgeDistribute" value="修改"/> -->
@@ -189,7 +205,7 @@ xxx</span>
  --%>
 
 <br/><br/><br/>
-<table id="scoreSpanAverage" width="800" border="1">
+<table id="scoreSpanAverage" class="distributeListClass" width="800" border="1">
   <caption>
   <span id="scoreDistributeCourse" class="course">${curCourseName }</span>
     成绩区间分布统计
@@ -205,15 +221,14 @@ xxx</span>
  
   <c:forEach var="score" items="${scoreList}">
  <jsp:useBean id="score" scope="request" class="domain.ScoreRangeBean" />
-            <tr>    
+            <tr>   
                  <td><jsp:getProperty property="class_number" name="score"/>
                  </td>        
                  <td><jsp:getProperty property="a" name="score"/></td>        
                  <td><jsp:getProperty property="b" name="score"/></td>        
                  <td><jsp:getProperty property="c" name="score"/></td>        
                  <td><jsp:getProperty property="d" name="score"/></td>        
-                <!--  <td>
-                 </td> -->   
+              
             </tr> 
                  
         </c:forEach>
@@ -228,7 +243,6 @@ xxx</span>
     <%-- <td id="scoreClassAverageEnd">${(aa+ba+ca+da)/4}</td> --%>
   </tr>
 </table>
-
 
 <a href="${pageContext.request.contextPath }/index.jsp">
 <font color="007777" size='4'>

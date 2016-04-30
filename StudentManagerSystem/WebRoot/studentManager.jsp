@@ -36,13 +36,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>studentManager</title>
 
-<!-- style type="text/css">
-bodyId
-{
-background-image:url('./img/cat1.jpg');
+<style type="text/css">
+.characterTableClass{
+   color:white;
+   font-size: 18px;
 }
 
-</style> -->
+</style>
 </head>
 <%@ page language="java" import="domain.*" %>
 <%@ page language="java" import="java.util.ArrayList" %>
@@ -53,6 +53,8 @@ background-image:url('./img/cat1.jpg');
 <h1 id="head1">学生管理</h1>
 </div>
 <br/>
+
+
 <div id="operation">
 <div id="query">
 <font size="+2" color="#0000CC">${noneCourseInfo }</font><br/>
@@ -68,8 +70,9 @@ background-image:url('./img/cat1.jpg');
 
 
 
+
 <div id="stuInfo"  style="display:${displayStuInfo}">
-<table id="showStudent">
+<table id="showStudent" class="characterTableClass">
 <jsp:useBean id="studentBean" scope="request" class="domain.StudentBean" />
             <tr>
     <th scope="col">学号</th>
@@ -91,6 +94,9 @@ background-image:url('./img/cat1.jpg');
 
 <br/>
 <br/>
+
+
+
 
 
 <div id="modify">
@@ -115,9 +121,11 @@ background-image:url('./img/cat1.jpg');
 
 
 
+
+
 <font color="#666677">如果不输入班级号如：13011，表示查询已选课程所有学生成绩</font>
 <br/><br/>
-<table id="studentInfo" width="800" border="1">
+<table id="studentInfo" width="800" border="1" class="characterTableClass">
   <caption>
   <span id="courseId">
   <jsp:useBean id="defaultCourse" scope="request" class="domain.CourseBean" />
