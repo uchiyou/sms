@@ -44,7 +44,7 @@ public class TestManagerServlet extends HttpServlet {
 		
 		if(scoreList!=null)
 		for(ScoreRangeBean bean:scoreList){
-		System.out.println("scoreList :"+bean.getA()+"--"+bean.getClass_number()+"--"+bean.getCourse_record_id());
+	//	System.out.println("scoreList :"+bean.getA()+"--"+bean.getClass_number()+"--"+bean.getCourse_record_id());
 		aa+=bean.getA();
 		ba+=bean.getB();
 		ca+=bean.getC();

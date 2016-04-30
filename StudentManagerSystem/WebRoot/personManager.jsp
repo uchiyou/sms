@@ -34,6 +34,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>personManager</title>
+<style type="text/css">
+.characterTableClass{
+   color: green;
+   font-size: 18px;
+}
+
+</style>
 </head>
 
 <%@ page language="java" import="domain.*" %>
@@ -46,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div id="person">
 </div>
 <form action="${pageContext.request.contextPath }/servlet/PersonManagerServlet" method="post">
-<table id="personInfo" width="500" border="1">
+<table id="personInfo" width="500" border="1" class="characterTableClass">
   <caption>
     <span id="personName">${wageNumber }
     </span>个人信息

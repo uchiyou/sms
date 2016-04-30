@@ -70,7 +70,7 @@ public class SignUpServlet extends HttpServlet{
 	    req.getRequestDispatcher("/jsp/signUp.jsp").forward(req, resp);
 	}catch(Exception e){
 			e.printStackTrace();
-			System.out.println("-------------->"+e.getMessage());
+		//	System.out.println("-------------->"+e.getMessage());
 			req.setAttribute("errorInfo", "不好意思，注册时粗错鸟~~");
 			req.getRequestDispatcher("/error.jsp").forward(req, resp);
 			

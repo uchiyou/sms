@@ -19,6 +19,9 @@ body{
 	font-size:14px;
 	font-family:"微软雅黑","宋体";
 }
+.characterTableClass{
+   color: green;
+}
 
 </style>
 </head>
@@ -44,7 +47,7 @@ body{
 <font size="+2" color="#0000CC">${noneCourseInfo }</font><br/>
 <div id="mycourseDiv">
 
-<table id="courseInfo" width="600" border="1">
+<table id="courseInfo" width="600" border="1" class="characterTableClass">
   <caption>
     ${curUser }课程
   </caption>
@@ -103,7 +106,7 @@ body{
 
 <form id="insertCourseRecord" action="${pageContext.request.contextPath }/servlet/CourseManagerServlet" method="post">
 
-<table width="600" border="1">
+<table width="600" border="1" class="characterTableClass">
   <caption>
   <span id="record_courseId" class="course"></span>
                          ${curCourseName }课程实施记录
