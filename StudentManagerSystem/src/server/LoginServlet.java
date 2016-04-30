@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		// check input
+		// check input information whether the right format
 		String wageNumber=request.getParameter("wageNumber");
 	       if("".equals(wageNumber)||wageNumber==null||"".equals(wageNumber.trim())){
 	    	   request.setAttribute("loginInfo", "用户名或密码不能为空");
@@ -86,6 +86,8 @@ public class LoginServlet extends HttpServlet {
 				
 				
 				// this case is a student
+				
+				// check input information from database
 				if(wageNumber.matches("[0|1|2]([0-9]{10})")){// current user is a student
 					student=StudentDao.query(wageNumber);
 					String password=request.getParameter("password");
@@ -105,6 +107,7 @@ public class LoginServlet extends HttpServlet {
 					// this case is a teacher
 				}else{
 			
+					// check input information from database
 				teacher = PersonDao.query(wageNumber);
 				String password=request.getParameter("password");
 			
@@ -122,17 +125,21 @@ public class LoginServlet extends HttpServlet {
 					    curUser= teacher.getName()+" "+teacher.getJob();
 				}
 				}
+				  
+				
+				
+				session.setAttribute("online", "online");// mark the current user is online
+				session.setAttribute("curUser", curUser);
+				request.getRequestDispatcher("/index.jsp").forward(request, response);
+				
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				request.setAttribute("errorInfo", "登陆时，出现了 SQL Exception");
 				request.getRequestDispatcher("/error.jsp").forward(request, response);
 			}//get the information from databases
-			  
-			session.setAttribute("online", "online");// mark the current user is online
-			session.setAttribute("curUser", curUser);
-			request.removeAttribute("curUser");
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			
 	}
 
 }

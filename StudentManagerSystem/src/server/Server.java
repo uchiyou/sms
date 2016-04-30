@@ -119,22 +119,22 @@ public class Server {// write by uchiyou
 	
 	
 	
-	// query teacher's course
+	// query teacher's course，Save his all course information into request and return current user choice course id
 	public static Integer getTeacherCourse(HttpServletRequest request, HttpServletResponse response,TeacherBean teacher)
 			throws ServletException, IOException, SQLException{
 		/*
 		 * getTeacherCourse will set current teacher's course into HttpServletRequest as named courseList
 		 * and will return the course which user had choice
 		 * */
-		
+		// if user choose a course, then set the courseId
 		String courseId=request.getParameter("chooseCourse");
-		Integer chooseCourse=request.getParameter("chooseCourseRecord")==null?-1:Integer.parseInt(courseId==null?"-1":courseId);
+		Integer chooseCourse=courseId==null?-1:Integer.parseInt(courseId);
 		
 		//System.out.println("chooseCouse --------------->"+chooseCourse);
 		
 		
 		
-		
+		//  获取教师的所有课程
 		LinkedList<CourseBean> courseList=new LinkedList<CourseBean>();// so courseList can't be null
 		
 /*			courseList.addAll(((List<CourseBean>)(CourseQueryDao.queryTeacherCourses(teacher.getWage_number()))));*/
@@ -146,9 +146,9 @@ public class Server {// write by uchiyou
 		    	return -1;
 		    }
 			
-			request.setAttribute("curUser", teacher.getName()+" "+teacher.getJob());
-			
-			
+		
+		    
+			//  将查询到的 teacherCourse 结果保存到 request中
 			if(!courseList.isEmpty()){//if a teacher have no course 					
 			chooseCourse=chooseCourse==-1?courseList.get(0).getCourse_number():chooseCourse;
 			setCourseListOrder(courseList, chooseCourse);
