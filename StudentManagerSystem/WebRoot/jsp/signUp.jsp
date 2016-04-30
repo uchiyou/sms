@@ -13,7 +13,7 @@
 </head>
 
 
-<body style="background:url(${pageContext.request.contextPath }/img/flower.jpg);">
+<body style="background:url(${pageContext.request.contextPath }/img2/water2.jpg);">
 
 <script type="text/javascript">
 function showStudentInfo(radioId){

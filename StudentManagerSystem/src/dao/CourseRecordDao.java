@@ -3,13 +3,11 @@ package dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.junit.Test;
-
 import databaseUtil.ListHander;
 import databaseUtil.MysqlTool;
-import domain.CourseBean;
 import domain.CourseRecordBean;
-import domain.TeacherCourseBean;
+import domain.ScoreRangeBean;
+import domain.TeacherBean;
 
 
 public class CourseRecordDao {
@@ -25,13 +23,24 @@ public class CourseRecordDao {
 		Object parameters[]={};		
 		return (ArrayList<CourseRecordBean>) MysqlTool.query(sql, parameters, new ListHander(CourseRecordBean.class));		
 	}
-	public static void insert(CourseRecordBean courseRecord) throws SQLException{
+	public static int insert(CourseRecordBean courseRecord, TeacherBean teacher) throws SQLException{
+		int course_number=courseRecord.getCourse_number();
+		String course_record_relation="insert into course_record_relation(course_number,class_number) values(?,?)";
+		ArrayList<ScoreRangeBean> list=TestManagerUtil.queryScoreRangeBean(teacher.getWage_number(), course_number);
+	   if(list==null||list.size()<1)
+		   return -1;
+	   
+		ScoreRangeBean bean=list.get(0);
+		Object crrp[]={course_number,bean.getClass_number()};
+		MysqlTool.executeSql(course_record_relation, crrp);
+		
 		String sql="insert into course_record values(?,?,?,?,?)";
 		Object parameters[]={courseRecord.getCourse_record_id(),courseRecord.getSequence(),
-				courseRecord.getCourse_content(),courseRecord.getType(),courseRecord.getCourse_number()};
-		for(Object o:parameters)
+				courseRecord.getCourse_content(),courseRecord.getType(),course_number};
+		/*for(Object o:parameters)
 		System.out.println("-------->"+o.toString());
-		MysqlTool.executeSql(sql, parameters);	
+*/		MysqlTool.executeSql(sql, parameters);	
+		return 0;
 	}
 
 }

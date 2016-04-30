@@ -11,6 +11,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>courseManager</title>
+<style type="text/css">
+
+body{
+	margin:0;
+	padding:0;
+	font-size:14px;
+	font-family:"微软雅黑","宋体";
+}
+
+</style>
 </head>
 
 
@@ -22,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  
 
 
-<body style="background:url(${pageContext.request.contextPath }/img2/water2.jpg);">
+<body style="background:url(${pageContext.request.contextPath }/img/flower.jpg);">
 
 
 <center>
@@ -84,7 +94,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                          </option>
         </c:forEach>            
 </select>
-<input type="submit" value="提交"/>
+<input type="submit" value="确认"/>
 </form>
 
 
