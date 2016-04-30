@@ -27,6 +27,7 @@ DROP TABLE IF EXISTS `teacher_class`;
 CREATE TABLE `teacher_class` (
   `wage_number` varchar(30) NOT NULL,
   `class_number` int(20) NOT NULL,
+  `course_id` int(20) DEFAULT NULL,
   KEY `teacher_class_teacher` (`wage_number`),
   KEY `teacher_class_class` (`class_number`),
   CONSTRAINT `teacher_class_class` FOREIGN KEY (`class_number`) REFERENCES `class` (`class_number`),
@@ -40,7 +41,7 @@ CREATE TABLE `teacher_class` (
 
 LOCK TABLES `teacher_class` WRITE;
 /*!40000 ALTER TABLE `teacher_class` DISABLE KEYS */;
-INSERT INTO `teacher_class` VALUES ('123',13011),('123',14011),('123456',14011),('123456',15011);
+INSERT INTO `teacher_class` VALUES ('123',13011,1000),('123',14011,1001),('123456',14011,1001),('123456',15011,1000),('123',13011,1001),('123',13011,1002),('123',13011,1003),('123',13011,1004),('123',13011,1005),('123456',13011,1005),('123456',13011,1004),('789',13011,1004),('789',13011,1000),('789',14011,1000);
 /*!40000 ALTER TABLE `teacher_class` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-29 16:26:51
+-- Dump completed on 2016-04-30 17:22:36
