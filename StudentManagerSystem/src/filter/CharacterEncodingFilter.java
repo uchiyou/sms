@@ -30,7 +30,6 @@ public class CharacterEncodingFilter implements Filter {
 		response.setContentType("text/html;charset=UTF-8");
 		chain.doFilter(request, response);
 		
-
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {
