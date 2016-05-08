@@ -35,6 +35,10 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		
+		System.out.println("login getContextPath()-----> "+request.getContextPath());
+		
+		
 		// check input information whether the right format
 		String wageNumber=request.getParameter("wageNumber");
 	       if("".equals(wageNumber)||wageNumber==null||"".equals(wageNumber.trim())){
